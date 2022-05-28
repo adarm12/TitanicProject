@@ -32,6 +32,17 @@ public class MainPanel extends JPanel {
         this.add(combo.getSexComboBox());
         this.add(combo.getPassengerSibSpNumberLabel());
         this.add(combo.getPassengerSibSpNumberTextFiled());
+        this.add(combo.getPassengerParchNumberLabel());
+        this.add(combo.getPassengerParchSpNumberTextFiled());
+        this.add(combo.getFareLabelLabel());
+        this.add(combo.getFareTextField1());
+        this.add(combo.getFareTextField2());
+        this.add(combo.getTicketNumberLabel());
+        this.add(combo.getTicketNumberTextFiled());
+        this.add(combo.getCabinNumberLabel());
+        this.add(combo.getCabinNumberTextFiled());
+        this.add(combo.getEmbarkedLabel());
+        this.add(combo.getEmbarkedCoboBox());
 
 
     }
