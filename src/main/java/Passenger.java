@@ -45,7 +45,6 @@ public class Passenger {
         this.cabin = list.get(10);
 //         this.embarked = (list.get(11));
     }
-
     public String getFormattedName() {
         int comma = 0;
         int dot = 0;
