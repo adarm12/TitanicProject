@@ -31,22 +31,25 @@ public class Passenger {
         this.embarked = embarked;
     }
 
-    public Passenger(List<String> list) {
-        this.passengerId = Integer.parseInt(list.get(0));
-//        this.survived = Integer.parseInt(list.get(1));
-        this.pClass = Integer.parseInt(list.get(2));
-        this.name = list.get(3);
-        this.sex = list.get(4);
-        this.age = Integer.parseInt(list.get(5));
-        this.sibSp = Integer.parseInt(list.get(6));
-        this.parch = Integer.parseInt(list.get(7));
-        this.ticket = list.get(8);
-        this.fare = Integer.parseInt(list.get(9));
-        this.cabin = list.get(10);
-//         this.embarked = (list.get(11));
+    public Passenger(String str) {
+       String[] list = str.split(",");
+        this.passengerId = Integer.parseInt(list[0]);
+        if (list[1].equals("1"))
+            this.survived = true;
+//        this.pClass = Integer.parseInt(list.get(2));
+//        this.name = list.get(3);
+//        this.sex = list.get(4);
+//        this.age = Integer.parseInt(list.get(5));
+//        this.sibSp = Integer.parseInt(list.get(6));
+//        this.parch = Integer.parseInt(list.get(7));
+//        this.ticket = list.get(8);
+//        this.fare = Integer.parseInt(list.get(9));
+//        this.cabin = list.get(10);
+//        this.embarked = (list.get(11).charAt(0));
     }
+
     public String getFormattedName() {
-        int comma = 0;
+        int comma = 0; // פסיק
         int dot = 0;
         for (int i = 0; i < this.name.length(); i++) {
             if (this.name.charAt(i) == Constants.COMMA)
@@ -54,7 +57,7 @@ public class Passenger {
             else if (this.name.charAt(i) == Constants.DOT)
                 dot = i;
         }
-        String name = this.name.substring(0, comma) + this.name.substring(dot);
+        String name =  this.name.substring(dot+Constants.LETTER_AFTER_DOT) + " " + this.name.substring(0, comma);
         return (name);
     }
 
@@ -144,5 +147,22 @@ public class Passenger {
 
     public void setEmbarked(char embarked) {
         this.embarked = embarked;
+    }
+
+    @Override
+    public String toString() {
+        return "Passenger{ passengerId= " + passengerId +
+                ", survived=" + survived +
+                ", pClass=" + pClass +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", age=" + age +
+                ", sibSp=" + sibSp +
+                ", parch=" + parch +
+                ", ticket='" + ticket + '\'' +
+                ", fare=" + fare +
+                ", cabin='" + cabin + '\'' +
+                ", embarked=" + embarked +
+                '}';
     }
 }

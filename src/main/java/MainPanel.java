@@ -7,30 +7,15 @@ import java.util.Scanner;
 
 
 public class MainPanel extends JPanel {
-    List<Passenger> passengers;
+    private List<Passenger> passengers;
     private JComboBox<String> survivedComboBox;
 
-    public MainPanel (int x, int y, int width, int height) {
-        File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
-        List<Passenger> passengerList = new ArrayList<>();
-        try {
-            Scanner scanner = new Scanner(file);
-            int i = 0;
-            while (scanner.hasNextLine()){
-                String passenger = scanner.nextLine();
-                if (i != 0){
-//                    Passenger passengerObject = new Passenger(passengerList);
-//                    passengerList.add(passengerObject);
-                }
-                i++;
-            }
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
+    public MainPanel(int x, int y, int width, int height) {
         this.setLayout(null);
         this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
 
-        this.passengers = readFromFile(Constants.PATH_TO_DATA_FILE);
+        File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
+        this.passengers = readFromFile(file);
 
 
         JLabel survivedLabel = new JLabel("Passenger Class: ");
@@ -45,26 +30,26 @@ public class MainPanel extends JPanel {
     }
 
 
-    public List<Passenger> readFromFile(String path) {
-
+    public List<Passenger> readFromFile(File file) {
         List<Passenger> passengers = new ArrayList<>();
         try {
-
-            Scanner sc = new Scanner(new File(path));
-            //parsing a CSV file into the constructor of Scanner class
-            sc.useDelimiter(",");
-            //setting comma as delimiter pattern
-            while (sc.hasNext()) {
-                sc.next();
+            Scanner scanner = new Scanner(file);
+            int i = 0;
+            while (scanner.hasNextLine()) {
+                String passenger = scanner.nextLine();
+                System.out.println(passenger);
+                if (i != 0) {
+                    Passenger passengerObject = new Passenger(passenger);
+                    passengers.add(passengerObject);
+                }
+                i++;
             }
-            sc.close();
-        }catch (FileNotFoundException e)
-        {
-            e.fillInStackTrace();
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-
         return passengers;
-
     }
+
 
 }
