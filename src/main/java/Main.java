@@ -2,9 +2,7 @@ import javax.swing.*;
 
 class Main extends JFrame {
 
-    public static void main(String[] args) {
-        new Main();
-    }
+
 
     public Main() {
         this.setTitle("Titanic Passengers Data");
@@ -16,6 +14,9 @@ class Main extends JFrame {
         this.setVisible(true);
     }
 
+    public static void main(String[] args) {
+        new Main();
+    }
 
 
 }

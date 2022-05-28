@@ -51,7 +51,7 @@ public class Passenger {
         this.ticket = list[Constants.PASSENGER_TICKET];
         this.fare = Double.parseDouble(list[Constants.PASSENGER_FARE]);
         this.cabin = list[Constants.PASSENGER_CABIN];
-        this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
+  //      this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
     }
 
     public String getFormattedName(String string) {
