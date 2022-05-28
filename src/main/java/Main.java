@@ -14,7 +14,6 @@ class Main extends JFrame {
         this.setLocationRelativeTo(null);
         this.add(new MainPanel(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         this.setVisible(true);
-
     }
 
 

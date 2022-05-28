@@ -1,9 +1,9 @@
 import java.util.List;
 
-public class Passenger {
 
+public class Passenger {
     private int passengerId;
-    private int survived;
+    private boolean survived;
     private int pClass;
     private String name;
     private String sex;
@@ -11,11 +11,11 @@ public class Passenger {
     private int sibSp;
     private int parch;
     private String ticket;
-    private int fare;
+    private double fare;
     private String cabin;
     private char embarked;
 
-    public Passenger(int passengerId, int survived, int pClass, String name, String sex, int age, int sibSp,
+    public Passenger(int passengerId, boolean survived, int pClass, String name, String sex, int age, int sibSp,
                      int parch, String ticket, int fare, String cabin, char embarked) {
         this.passengerId = passengerId;
         this.survived = survived;
@@ -33,7 +33,7 @@ public class Passenger {
 
     public Passenger(List<String> list) {
         this.passengerId = Integer.parseInt(list.get(0));
-        this.survived = Integer.parseInt(list.get(1));
+//        this.survived = Integer.parseInt(list.get(1));
         this.pClass = Integer.parseInt(list.get(2));
         this.name = list.get(3);
         this.sex = list.get(4);
@@ -43,9 +43,8 @@ public class Passenger {
         this.ticket = list.get(8);
         this.fare = Integer.parseInt(list.get(9));
         this.cabin = list.get(10);
-       // this.embarked = (list.get(11));
+//         this.embarked = (list.get(11));
     }
-
     public String getFormattedName() {
         int comma = 0;
         int dot = 0;
@@ -67,11 +66,11 @@ public class Passenger {
         this.passengerId = passengerId;
     }
 
-    public int getSurvived() {
+    public boolean isSurvived() {
         return survived;
     }
 
-    public void setSurvived(int survived) {
+    public void setSurvived(boolean survived) {
         this.survived = survived;
     }
 
@@ -81,6 +80,10 @@ public class Passenger {
 
     public void setpClass(int pClass) {
         this.pClass = pClass;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
@@ -127,20 +130,12 @@ public class Passenger {
         this.ticket = ticket;
     }
 
-    public int getFare() {
+    public double getFare() {
         return fare;
     }
 
-    public void setFare(int fare) {
+    public void setFare(double fare) {
         this.fare = fare;
-    }
-
-    public String getCabin() {
-        return cabin;
-    }
-
-    public void setCabin(String cabin) {
-        this.cabin = cabin;
     }
 
     public char getEmbarked() {
@@ -150,23 +145,4 @@ public class Passenger {
     public void setEmbarked(char embarked) {
         this.embarked = embarked;
     }
-
-    @Override
-    public String toString() {
-        return "Passenger{" +
-                "passengerId=" + passengerId +
-                ", survived=" + survived +
-                ", pClass=" + pClass +
-                ", name='" + name + '\'' +
-                ", sex='" + sex + '\'' +
-                ", age=" + age +
-                ", sibSp=" + sibSp +
-                ", parch=" + parch +
-                ", ticket='" + ticket + '\'' +
-                ", fare=" + fare +
-                ", cabin='" + cabin + '\'' +
-                ", embarked=" + embarked +
-                '}';
-    }
 }
-
