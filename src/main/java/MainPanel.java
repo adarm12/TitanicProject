@@ -15,7 +15,7 @@ public class MainPanel extends JPanel {
     public MainPanel(int x, int y, int width, int height) {
         this.setLayout(null);
         this.setBounds(x, y, width, height);
-        this.background = new ImageIcon("ספינה.jpg");
+        this.background = new ImageIcon("ספינה.png");
 
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
         this.passengers = readFromFile(file);
