@@ -17,8 +17,8 @@ public class MainPanel extends JPanel {
             while (scanner.hasNextLine()){
                 String passenger = scanner.nextLine();
                 if (i != 0){
-                    Passenger passengerObject = new Passenger(passenger);
-                    passengerList.add(passengerObject);
+//                    Passenger passengerObject = new Passenger(passengerList);
+//                    passengerList.add(passengerObject);
                 }
                 i++;
             }

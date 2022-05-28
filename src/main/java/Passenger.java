@@ -1,3 +1,6 @@
+import java.util.List;
+
+
 public class Passenger {
     private int passengerId;
     private boolean survived;
@@ -9,9 +12,11 @@ public class Passenger {
     private int parch;
     private String ticket;
     private double fare;
+    private String cabin;
     private char embarked;
 
-    public Passenger(String name) {
+    public Passenger(int passengerId, boolean survived, int pClass, String name, String sex, int age, int sibSp,
+                     int parch, String ticket, int fare, String cabin, char embarked) {
         this.passengerId = passengerId;
         this.survived = survived;
         this.pClass = pClass;
@@ -22,7 +27,36 @@ public class Passenger {
         this.parch = parch;
         this.ticket = ticket;
         this.fare = fare;
+        this.cabin = cabin;
         this.embarked = embarked;
+    }
+
+    public Passenger(List<String> list) {
+        this.passengerId = Integer.parseInt(list.get(0));
+//        this.survived = Integer.parseInt(list.get(1));
+        this.pClass = Integer.parseInt(list.get(2));
+        this.name = list.get(3);
+        this.sex = list.get(4);
+        this.age = Integer.parseInt(list.get(5));
+        this.sibSp = Integer.parseInt(list.get(6));
+        this.parch = Integer.parseInt(list.get(7));
+        this.ticket = list.get(8);
+        this.fare = Integer.parseInt(list.get(9));
+        this.cabin = list.get(10);
+//         this.embarked = (list.get(11));
+    }
+
+    public String getFormattedName() {
+        int comma = 0;
+        int dot = 0;
+        for (int i = 0; i < this.name.length(); i++) {
+            if (this.name.charAt(i) == Constants.COMMA)
+                comma = i;
+            else if (this.name.charAt(i) == Constants.DOT)
+                dot = i;
+        }
+        String name = this.name.substring(0, comma) + this.name.substring(dot);
+        return (name);
     }
 
     public int getPassengerId() {
