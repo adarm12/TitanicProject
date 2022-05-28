@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -9,17 +10,19 @@ import java.util.Scanner;
 public class MainPanel extends JPanel {
     private List<Passenger> passengers;
     private JComboBox<String> survivedComboBox;
+    private ImageIcon background;
 
     public MainPanel(int x, int y, int width, int height) {
         this.setLayout(null);
-        this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
+        this.setBounds(x, y, width, height);
+        this.background = new ImageIcon("ספינה.jpg");
 
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
         this.passengers = readFromFile(file);
-     //   System.out.println(this.passengers.get(2));
+        System.out.println(this.passengers.get(3));
 
         JLabel survivedLabel = new JLabel("Passenger Class: ");
-        survivedLabel.setBounds(x + Constants.MARGIN_FROM_LEFT, y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
+        survivedLabel.setBounds(x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.add(survivedLabel);
         this.survivedComboBox = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
         this.survivedComboBox.setBounds(survivedLabel.getX() + survivedLabel.getWidth() + 1, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
@@ -51,5 +54,9 @@ public class MainPanel extends JPanel {
         return passengers;
     }
 
+    public void paintComponent(Graphics graphics) {
+        graphics.drawImage(this.background.getImage(), 0, 0,
+                Constants.WINDOW_WIDTH,Constants.WINDOW_HEIGHT, null);
+    }
 
 }
