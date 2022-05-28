@@ -16,7 +16,7 @@ public class MainPanel extends JPanel {
 
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
         this.passengers = readFromFile(file);
-
+     //   System.out.println(this.passengers.get(2));
 
         JLabel survivedLabel = new JLabel("Passenger Class: ");
         survivedLabel.setBounds(x + Constants.MARGIN_FROM_LEFT, y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
@@ -37,7 +37,7 @@ public class MainPanel extends JPanel {
             int i = 0;
             while (scanner.hasNextLine()) {
                 String passenger = scanner.nextLine();
-                System.out.println(passenger);
+             //   System.out.println(passenger);
                 if (i != 0) {
                     Passenger passengerObject = new Passenger(passenger);
                     passengers.add(passengerObject);

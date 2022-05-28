@@ -7,7 +7,7 @@ public class Passenger {
     private int pClass;
     private String name;
     private String sex;
-    private int age;
+    private double age;
     private int sibSp;
     private int parch;
     private String ticket;
@@ -15,7 +15,7 @@ public class Passenger {
     private String cabin;
     private char embarked;
 
-    public Passenger(int passengerId, boolean survived, int pClass, String name, String sex, int age, int sibSp,
+    public Passenger(int passengerId, boolean survived, int pClass, String name, String sex, double age, int sibSp,
                      int parch, String ticket, int fare, String cabin, char embarked) {
         this.passengerId = passengerId;
         this.survived = survived;
@@ -32,32 +32,38 @@ public class Passenger {
     }
 
     public Passenger(String str) {
-       String[] list = str.split(",");
-        this.passengerId = Integer.parseInt(list[0]);
-        if (list[1].equals("1"))
+        String[] list = str.split(Constants.SPLIT_BY_COMMA);
+        for (int i = 0; i < list.length; i++) {
+            if (list[i].equals(""))
+                list[i] = "0";
+        }
+
+        this.passengerId = Integer.parseInt(list[Constants.PASSENGER_ID]);
+        if (list[Constants.PASSENGER_SURVIVED].equals(Constants.PASSENGER_SURVIVED_1))
             this.survived = true;
-        this.pClass = Integer.parseInt(list[2]);
-        this.name = list[3] + list[4];
-        this.sex = list[5];
-        this.age = Integer.parseInt(list[6]);
-        this.sibSp = Integer.parseInt(list[7]);
-        this.parch = Integer.parseInt(list[8]);
-        this.ticket = list[9];
-        this.fare = Integer.parseInt(list[10]);
-        this.cabin = list[11];
-        this.embarked = (list[12].charAt(0));
+        this.pClass = Integer.parseInt(list[Constants.PASSENGER_P_CLASS]);
+        // String fullName = list[Constants.PASSENGER_FIRST_NAME] + list[Constants.PASSENGER_LAST_NAME];
+        this.name = list[Constants.PASSENGER_FIRST_NAME] + list[Constants.PASSENGER_LAST_NAME];
+        this.sex = list[Constants.PASSENGER_SEX];
+        this.age = Double.parseDouble(list[Constants.PASSENGER_AGE]);
+        this.sibSp = Integer.parseInt(list[Constants.PASSENGER_SIB_SP]);
+        this.parch = Integer.parseInt(list[Constants.PASSENGER_PARCH]);
+        this.ticket = list[Constants.PASSENGER_TICKET];
+        this.fare = Double.parseDouble(list[Constants.PASSENGER_FARE]);
+        this.cabin = list[Constants.PASSENGER_CABIN];
+        this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
     }
 
-    public String getFormattedName() {
+    public String getFormattedName(String string) {
         int comma = 0; // פסיק
         int dot = 0;
-        for (int i = 0; i < this.name.length(); i++) {
-            if (this.name.charAt(i) == Constants.COMMA)
+        for (int i = 0; i < string.length(); i++) {
+            if (string.charAt(i) == Constants.COMMA)
                 comma = i;
-            else if (this.name.charAt(i) == Constants.DOT)
+            else if (string.charAt(i) == Constants.DOT)
                 dot = i;
         }
-        String name =  this.name.substring(dot+Constants.LETTER_AFTER_DOT) + " " + this.name.substring(0, comma);
+        String name = string.substring(dot + Constants.LETTER_AFTER_DOT) + " " + string.substring(0, comma);
         return (name);
     }
 
@@ -101,11 +107,11 @@ public class Passenger {
         this.sex = sex;
     }
 
-    public int getAge() {
+    public double getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(double age) {
         this.age = age;
     }
 

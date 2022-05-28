@@ -7,6 +7,7 @@ public class Constants {
             PASSENGER_FIRST_NAME = 3, PASSENGER_LAST_NAME = 4, PASSENGER_SEX = 5, PASSENGER_AGE = 6,
             PASSENGER_SIB_SP = 7, PASSENGER_PARCH = 8, PASSENGER_TICKET = 9, PASSENGER_FARE = 10, PASSENGER_CABIN = 11,
             PASSENGER_EMBARKED = 12;
+    public static final String PASSENGER_SURVIVED_1 ="1", SPLIT_BY_COMMA = ",";
 
 
     public static final String[] PASSENGER_CLASS_OPTIONS = {"All", "1st", "2nd", "3rd"};
