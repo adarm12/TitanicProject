@@ -3,24 +3,46 @@ import java.awt.*;
 
 public class Filter {
 
-    Font myFont = new Font("Gisha", Font.BOLD, 16);
-    Font textFiledFont = new Font("Gisha", Font.BOLD, 16);
+    Font myFont = new Font("Gisha", Font.BOLD, 18);
+    Font textFiledFont = new Font("Gisha", Font.BOLD, 18);
 
-    private JComboBox survivedComboBox;
     private JLabel survivedLabel;
+    private JComboBox survivedComboBox;
+    private JLabel passengerIdRangeLabel;
     private JTextField passengerIdRangeTextField1;
     private JTextField passengerIdRangeTextField2;
-    private JLabel passengerIdRangeLabel;
+    private JLabel passengerNameLabel;
+    private JTextField passengerNameTextFiled;
+    private JLabel sexLabel;
+    private JComboBox sexComboBox;
+    private JLabel passengerSibSpNumberLabel;
+    private JTextField passengerSibSpNumberTextFiled;
 
     public Filter(int x, int y) {
-        this.survivedLabel = newLabel("Passenger ID rang: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
-        this.passengerIdRangeTextField1 = newTextField(survivedLabel.getX() + survivedLabel.getWidth() + 1, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
-        this.passengerIdRangeTextField2 = newTextField(survivedLabel.getX() + survivedLabel.getWidth() + 75, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
+        this.passengerIdRangeLabel = newLabel("Passenger ID rang: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 60, Constants.LABEL_HEIGHT);
+        this.passengerIdRangeTextField1 = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
+        this.passengerIdRangeTextField2 = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 75, passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
+
+        this.survivedLabel = newLabel("Survived status:  ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 4 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 20, Constants.LABEL_HEIGHT);
         this.survivedComboBox = new JComboBox(Constants.PASSENGER_CLASS_OPTIONS);
-        this.survivedComboBox.setBounds(survivedLabel.getX() + survivedLabel.getWidth() + 1, survivedLabel.getY() + 4 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+        this.survivedComboBox.setBounds(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + 4 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
         this.survivedComboBox.addActionListener((e) -> {
             //do whatever you want on change
         });
+
+        this.passengerNameLabel = newLabel("Passenger name: : ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 8 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 20, Constants.LABEL_HEIGHT);
+        this.passengerNameTextFiled = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + 8 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+
+        this.sexLabel = newLabel("Sex:  ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 12 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 20, Constants.LABEL_HEIGHT);
+        this.sexComboBox = new JComboBox(Constants.PASSENGER_CLASS_OPTIONS);
+        this.sexComboBox.setBounds(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + 12 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+        this.sexComboBox.addActionListener((e) -> {
+            //do whatever you want on change
+        });
+
+        this.passengerSibSpNumberLabel = newLabel("Sibsp number : ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 16 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 20, Constants.LABEL_HEIGHT);
+        this.passengerSibSpNumberTextFiled = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + 16 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
+
 
     }
 
@@ -77,6 +99,54 @@ public class Filter {
 
     public void setPassengerIdRangeLabel(JLabel passengerIdRangeLabel) {
         this.passengerIdRangeLabel = passengerIdRangeLabel;
+    }
+
+    public JTextField getPassengerNameTextFiled() {
+        return passengerNameTextFiled;
+    }
+
+    public void setPassengerNameTextFiled(JTextField passengerNameTextFiled) {
+        this.passengerNameTextFiled = passengerNameTextFiled;
+    }
+
+    public JLabel getPassengerNameLabel() {
+        return passengerNameLabel;
+    }
+
+    public void setPassengerNameLabel(JLabel passengerNameLabel) {
+        this.passengerNameLabel = passengerNameLabel;
+    }
+
+    public JComboBox getSexComboBox() {
+        return sexComboBox;
+    }
+
+    public void setSexComboBox(JComboBox sexComboBox) {
+        this.sexComboBox = sexComboBox;
+    }
+
+    public JLabel getSexLabel() {
+        return sexLabel;
+    }
+
+    public void setSexLabel(JLabel sexLabel) {
+        this.sexLabel = sexLabel;
+    }
+
+    public JLabel getPassengerSibSpNumberLabel() {
+        return passengerSibSpNumberLabel;
+    }
+
+    public void setPassengerSibSpNumberLabel(JLabel passengerSibSpNumberLabel) {
+        this.passengerSibSpNumberLabel = passengerSibSpNumberLabel;
+    }
+
+    public JTextField getPassengerSibSpNumberTextFiled() {
+        return passengerSibSpNumberTextFiled;
+    }
+
+    public void setPassengerSibSpNumberTextFiled(JTextField passengerSibSpNumberTextFiled) {
+        this.passengerSibSpNumberTextFiled = passengerSibSpNumberTextFiled;
     }
 }
 

@@ -21,10 +21,19 @@ public class MainPanel extends JPanel {
         System.out.println(this.passengers.get(3));
 
         Filter combo = new Filter(30,50);
-        this.add(combo.getSurvivedComboBox());
-        this.add(combo.getSurvivedLabel());
+        this.add(combo.getPassengerIdRangeLabel());
         this.add(combo.getPassengerIdRangeTextField1());
         this.add(combo.getPassengerIdRangeTextField2());
+        this.add(combo.getSurvivedLabel());
+        this.add(combo.getSurvivedComboBox());
+        this.add(combo.getPassengerNameLabel());
+        this.add(combo.getPassengerNameTextFiled());
+        this.add(combo.getSexLabel());
+        this.add(combo.getSexComboBox());
+        this.add(combo.getPassengerSibSpNumberLabel());
+        this.add(combo.getPassengerSibSpNumberTextFiled());
+
+
     }
 
 
