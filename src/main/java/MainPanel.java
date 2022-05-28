@@ -1,11 +1,30 @@
 import javax.swing.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class MainPanel extends JPanel {
     private JComboBox<String> survivedComboBox;
 
     public MainPanel (int x, int y, int width, int height) {
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
+        List<Passenger> passengerList = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(file);
+            int i = 0;
+            while (scanner.hasNextLine()){
+                String passenger = scanner.nextLine();
+                if (i != 0){
+                    Passenger passengerObject = new Passenger(passenger);
+                    passengerList.add(passengerObject);
+                }
+                i++;
+            }
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
         this.setLayout(null);
         this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
         JLabel survivedLabel = new JLabel("Passenger Class: ");
