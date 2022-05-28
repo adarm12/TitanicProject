@@ -36,16 +36,16 @@ public class Passenger {
         this.passengerId = Integer.parseInt(list[0]);
         if (list[1].equals("1"))
             this.survived = true;
-//        this.pClass = Integer.parseInt(list.get(2));
-//        this.name = list.get(3);
-//        this.sex = list.get(4);
-//        this.age = Integer.parseInt(list.get(5));
-//        this.sibSp = Integer.parseInt(list.get(6));
-//        this.parch = Integer.parseInt(list.get(7));
-//        this.ticket = list.get(8);
-//        this.fare = Integer.parseInt(list.get(9));
-//        this.cabin = list.get(10);
-//        this.embarked = (list.get(11).charAt(0));
+        this.pClass = Integer.parseInt(list[2]);
+        this.name = list[3] + list[4];
+        this.sex = list[5];
+        this.age = Integer.parseInt(list[6]);
+        this.sibSp = Integer.parseInt(list[7]);
+        this.parch = Integer.parseInt(list[8]);
+        this.ticket = list[9];
+        this.fare = Integer.parseInt(list[10]);
+        this.cabin = list[11];
+        this.embarked = (list[12].charAt(0));
     }
 
     public String getFormattedName() {
