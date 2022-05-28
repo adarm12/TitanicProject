@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class MainPanel extends JPanel {
     private List<Passenger> passengers;
-    private JComboBox<String> survivedComboBox;
     private ImageIcon background;
 
     public MainPanel(int x, int y, int width, int height) {
@@ -21,15 +20,11 @@ public class MainPanel extends JPanel {
         this.passengers = readFromFile(file);
         System.out.println(this.passengers.get(3));
 
-        JLabel survivedLabel = new JLabel("Passenger Class: ");
-        survivedLabel.setBounds(x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
-        this.add(survivedLabel);
-        this.survivedComboBox = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
-        this.survivedComboBox.setBounds(survivedLabel.getX() + survivedLabel.getWidth() + 1, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
-        this.add(this.survivedComboBox);
-        this.survivedComboBox.addActionListener((e) -> {
-            //do whatever you want on change
-        });
+        Filter combo = new Filter(30,50);
+        this.add(combo.getSurvivedComboBox());
+        this.add(combo.getSurvivedLabel());
+        this.add(combo.getPassengerIdRangeTextField1());
+        this.add(combo.getPassengerIdRangeTextField2());
     }
 
 
