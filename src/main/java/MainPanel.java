@@ -20,29 +20,29 @@ public class MainPanel extends JPanel {
         this.passengers = readFromFile(file);
         System.out.println(this.passengers.get(3));
 
-        Filter combo = new Filter(30,50);
-        this.add(combo.getPassengerIdRangeLabel());
-        this.add(combo.getPassengerIdRangeTextField1());
-        this.add(combo.getPassengerIdRangeTextField2());
-        this.add(combo.getSurvivedLabel());
-        this.add(combo.getSurvivedComboBox());
-        this.add(combo.getPassengerNameLabel());
-        this.add(combo.getPassengerNameTextFiled());
-        this.add(combo.getSexLabel());
-        this.add(combo.getSexComboBox());
-        this.add(combo.getPassengerSibSpNumberLabel());
-        this.add(combo.getPassengerSibSpNumberTextFiled());
-        this.add(combo.getPassengerParchNumberLabel());
-        this.add(combo.getPassengerParchSpNumberTextFiled());
-        this.add(combo.getFareLabelLabel());
-        this.add(combo.getFareTextField1());
-        this.add(combo.getFareTextField2());
-        this.add(combo.getTicketNumberLabel());
-        this.add(combo.getTicketNumberTextFiled());
-        this.add(combo.getCabinNumberLabel());
-        this.add(combo.getCabinNumberTextFiled());
-        this.add(combo.getEmbarkedLabel());
-        this.add(combo.getEmbarkedCoboBox());
+        Filter filter = new Filter(30,50);
+        this.add(filter.getPassengerIdRangeLabel());
+        this.add(filter.getPassengerIdRangeTextField1());
+        this.add(filter.getPassengerIdRangeTextField2());
+        this.add(filter.getSurvivedLabel());
+        this.add(filter.getSurvivedComboBox());
+        this.add(filter.getPassengerNameLabel());
+        this.add(filter.getPassengerNameTextFiled());
+        this.add(filter.getSexLabel());
+        this.add(filter.getSexComboBox());
+        this.add(filter.getPassengerSibSpNumberLabel());
+        this.add(filter.getPassengerSibSpNumberTextFiled());
+        this.add(filter.getPassengerParchNumberLabel());
+        this.add(filter.getPassengerParchSpNumberTextFiled());
+        this.add(filter.getFareLabelLabel());
+        this.add(filter.getFareTextField1());
+        this.add(filter.getFareTextField2());
+        this.add(filter.getTicketNumberLabel());
+        this.add(filter.getTicketNumberTextFiled());
+        this.add(filter.getCabinNumberLabel());
+        this.add(filter.getCabinNumberTextFiled());
+        this.add(filter.getEmbarkedLabel());
+        this.add(filter.getEmbarkedCoboBox());
 
 
     }
