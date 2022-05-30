@@ -24,6 +24,11 @@ public class Constants {
     public static final int SEARCH_BUTTON_X = 150;
     public static final int SEARCH_BUTTON_Y = 750;
 
+    public static final int FOUR_TIMES = 4;
+    public static final int EIGHT_TIMES = 8;
+    public static final int TWELVE_TIMES = 12;
+    public static final int SIXTEEN_TIMES = 16;
+
     public static final char COMMA = ',', DOT = '.';
     public static final int LETTER_AFTER_DOT = 2;
 }
