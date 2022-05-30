@@ -33,18 +33,18 @@ public class MainPanel extends JPanel {
         this.add(filter.getSexComboBox());
         this.add(filter.getPassengerSibSpNumberLabel());
         this.add(filter.getPassengerSibSpNumberTextFiled());
-        this.add(filter.getPassengerParchNumberLabel());
-        this.add(filter.getPassengerParchSpNumberTextFiled());
-        this.add(filter.getFareLabelLabel());
+      //  this.add(filter.getPassengerParchNumberLabel());
+      //  this.add(filter.getPassengerParchSpNumberTextFiled());
+//        this.add(filter.getFareLabel());
         this.add(filter.getFareTextField1());
-        this.add(filter.getFareTextField2());
-        this.add(filter.getTicketNumberLabel());
-        this.add(filter.getTicketNumberTextFiled());
-        this.add(filter.getCabinNumberLabel());
-        this.add(filter.getCabinNumberTextFiled());
-        this.add(filter.getEmbarkedLabel());
-        this.add(filter.getEmbarkedCoboBox());
-
+//        this.add(filter.getFareTextField2());
+//        this.add(filter.getTicketNumberLabel());
+//        this.add(filter.getTicketNumberTextFiled());
+//        this.add(filter.getCabinNumberLabel());
+//        this.add(filter.getCabinNumberTextFiled());
+//        this.add(filter.getEmbarkedLabel());
+//        this.add(filter.getEmbarkedCoboBox());
+//
 
        // System.out.println(Filter.rangePassengerId(890,1,this.passengers));
 
