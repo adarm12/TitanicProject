@@ -1,16 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Filter {
 
     Font myFont = new Font("Gisha", Font.BOLD, 18);
-    Font textFiledFont = new Font("Gisha", Font.BOLD, 18);
 
     private JLabel survivedLabel;
     private JComboBox survivedComboBox;
     private JLabel passengerIdRangeLabel;
-    private JTextField passengerIdRangeTextField1;
-    private JTextField passengerIdRangeTextField2;
+    private JTextField passengerIdRangeTextFieldMin;
+    private JTextField passengerIdRangeTextFieldMax;
     private JLabel passengerNameLabel;
     private JTextField passengerNameTextFiled;
     private JLabel sexLabel;
@@ -28,17 +30,34 @@ public class Filter {
     private JTextField cabinNumberTextFiled;
     private JLabel embarkedLabel;
     private JComboBox embarkedCoboBox;
+    private JButton button;
 
-    public Filter(int x, int y) {
+    private List<Passenger> passengers;
+
+    public Filter(int x, int y, List<Passenger> passengers) {
+
+        this.button = newButton("search", 150, 750);
+        this.passengers = passengers;
+
         this.passengerIdRangeLabel = newLabel("Passenger ID rang: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 60, Constants.LABEL_HEIGHT);
-        this.passengerIdRangeTextField1 = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
-        this.passengerIdRangeTextField2 = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 75, passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
+        this.passengerIdRangeTextFieldMin = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
+        this.passengerIdRangeTextFieldMax = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 75, passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
         this.survivedLabel = newLabel("Survived status:  ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 4 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 20, Constants.LABEL_HEIGHT);
         this.survivedComboBox = new JComboBox(Constants.PASSENGER_CLASS_OPTIONS);
         this.survivedComboBox.setBounds(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + 4 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
         this.survivedComboBox.addActionListener((e) -> {
-            //do whatever you want on change
+            System.out.println("hi");
+        });
+        this.button.addActionListener((e) -> {
+            if (this.passengerIdRangeTextFieldMin.getText() != "" && this.passengerIdRangeTextFieldMax.getText() != "") {
+                this.passengers = rangePassengerId(this.passengerIdRangeTextFieldMin.getText(),
+                        this.passengerIdRangeTextFieldMax.getText()
+                        , this.passengers);
+            }
+            if (this.passengerNameTextFiled.getText() != "")
+                this.passengers = byName(this.passengers, this.passengerNameTextFiled.getText());
+            System.out.println(this.passengers);
         });
 
         this.passengerNameLabel = newLabel("Passenger name: : ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 8 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 20, Constants.LABEL_HEIGHT);
@@ -76,11 +95,55 @@ public class Filter {
 
     }
 
+    public List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
+        if (startFrom.equals("")) {
+            startFrom = "1";
+        }
+        if (limitTo.equals("")) {
+            limitTo = "891";
+        }
+        int min = Integer.parseInt(startFrom);
+        int max = Integer.parseInt(limitTo);
+        if (min > max && max != 0) {
+            System.out.println("not vailied");
+            return this.passengers.stream().skip(passengers.size()).collect(Collectors.toList());
+        } else {
+            return this.passengers.stream().limit(max).skip(min - 1).collect(Collectors.toList());
+        }
+//        return passengers;
+    }
+//            int start = 0;
+//            int limit = passengers.size();
+//            if (startFrom != "")
+//                start = Integer.parseInt(startFrom);
+//            if (limitTo != "")
+//                limit = Integer.parseInt(limitTo);
+//
+//            while (start + limit != 0) {
+//                if (start == 0)
+//                    start++;
+//                if (limit >= start)
+//                    return this.passengers.stream().limit(limit).skip(start - 1).collect(Collectors.toList());
+//                else if (limit == 0) {
+//                    return passengers.stream().skip(start).collect(Collectors.toList());
+//                }
+//            }
+
+
+    private List<Passenger> byName(List<Passenger> passengers, String name) {
+        for (int i = 0; i < this.passengers.size(); i++) {
+            if (this.passengers.get(i).getName().contains((name)))
+                this.passengers.add(this.passengers.get(i));
+        }
+        return passengers;
+        // return this.passengers.stream().filter().collect(Collectors.toList());
+    }
+
 
     public JTextField newTextField(int x, int y, int width, int height) {
         JTextField textField = new JTextField();
         textField.setBounds(x, y, width, height);
-        textField.setFont(textFiledFont);
+        textField.setFont(myFont);
         return textField;
     }
 
@@ -91,6 +154,15 @@ public class Filter {
         return label;
     }
 
+    public JButton newButton(String text, int x, int y) {
+        button = new JButton(text);
+        button.setBounds(x, y, 250, 70);
+        button.setFont(myFont);
+        button.setFocusable(false);
+        return button;
+    }
+
+
     public JComboBox getSurvivedComboBox() {
         return survivedComboBox;
     }
@@ -98,6 +170,16 @@ public class Filter {
     public void setSurvivedComboBox(JComboBox survivedComboBox) {
         this.survivedComboBox = survivedComboBox;
     }
+
+
+    public JButton getButton() {
+        return button;
+    }
+
+    public void setButton(JButton button) {
+        this.button = button;
+    }
+
 
     public JLabel getSurvivedLabel() {
         return survivedLabel;
@@ -107,20 +189,20 @@ public class Filter {
         this.survivedLabel = survivedLabel;
     }
 
-    public JTextField getPassengerIdRangeTextField1() {
-        return passengerIdRangeTextField1;
+    public JTextField getPassengerIdRangeTextFieldMin() {
+        return passengerIdRangeTextFieldMin;
     }
 
-    public void setPassengerIdRangeTextField1(JTextField passengerIdRangeTextField1) {
-        this.passengerIdRangeTextField1 = passengerIdRangeTextField1;
+    public void setPassengerIdRangeTextFieldMin(JTextField passengerIdRangeTextFieldMin) {
+        this.passengerIdRangeTextFieldMin = passengerIdRangeTextFieldMin;
     }
 
-    public JTextField getPassengerIdRangeTextField2() {
-        return passengerIdRangeTextField2;
+    public JTextField getPassengerIdRangeTextFieldMax() {
+        return passengerIdRangeTextFieldMax;
     }
 
-    public void setPassengerIdRangeTextField2(JTextField passengerIdRangeTextField2) {
-        this.passengerIdRangeTextField2 = passengerIdRangeTextField2;
+    public void setPassengerIdRangeTextFieldMax(JTextField passengerIdRangeTextFieldMax) {
+        this.passengerIdRangeTextFieldMax = passengerIdRangeTextFieldMax;
     }
 
     public JLabel getPassengerIdRangeLabel() {

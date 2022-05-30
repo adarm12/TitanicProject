@@ -15,21 +15,6 @@ public class Passenger {
     private String cabin;
     private char embarked;
 
-    public Passenger(int passengerId, boolean survived, int pClass, String name, String sex, double age, int sibSp,
-                     int parch, String ticket, int fare, String cabin, char embarked) {
-        this.passengerId = passengerId;
-        this.survived = survived;
-        this.pClass = pClass;
-        this.name = name;
-        this.sex = sex;
-        this.age = age;
-        this.sibSp = sibSp;
-        this.parch = parch;
-        this.ticket = ticket;
-        this.fare = fare;
-        this.cabin = cabin;
-        this.embarked = embarked;
-    }
 
     public Passenger(String str) {
         String[] list = str.split(Constants.SPLIT_BY_COMMA);
@@ -51,7 +36,8 @@ public class Passenger {
         this.ticket = list[Constants.PASSENGER_TICKET];
         this.fare = Double.parseDouble(list[Constants.PASSENGER_FARE]);
         this.cabin = list[Constants.PASSENGER_CABIN];
-  //      this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
+
+        //      this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
     }
 
     public String getFormattedName(String string) {
@@ -66,6 +52,19 @@ public class Passenger {
         String name = string.substring(dot + Constants.LETTER_AFTER_DOT) + " " + string.substring(0, comma);
         return (name);
     }
+
+//    public void A(int min, int max) {
+//        int R;
+//        while (min + max != 0) {
+//            if (min == 0 && max > min)
+//                R = max;
+//            else if (max == 0 && min)
+//            {
+//
+//            }
+//        }
+//    }
+
 
     public int getPassengerId() {
         return passengerId;
@@ -169,6 +168,6 @@ public class Passenger {
                 ", fare=" + fare +
                 ", cabin='" + cabin + '\'' +
                 ", embarked=" + embarked +
-                '}';
+                '}'+"\n";
     }
 }

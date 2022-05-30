@@ -18,12 +18,13 @@ public class MainPanel extends JPanel {
 
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
         this.passengers = readFromFile(file);
-        System.out.println(this.passengers.get(3));
+//        System.out.println(this.passengers.get(3));
 
-        Filter filter = new Filter(30,50);
+        Filter filter = new Filter(30,50, this.passengers);
+        this.add(filter.getButton());
         this.add(filter.getPassengerIdRangeLabel());
-        this.add(filter.getPassengerIdRangeTextField1());
-        this.add(filter.getPassengerIdRangeTextField2());
+        this.add(filter.getPassengerIdRangeTextFieldMin());
+        this.add(filter.getPassengerIdRangeTextFieldMax());
         this.add(filter.getSurvivedLabel());
         this.add(filter.getSurvivedComboBox());
         this.add(filter.getPassengerNameLabel());
@@ -43,6 +44,9 @@ public class MainPanel extends JPanel {
         this.add(filter.getCabinNumberTextFiled());
         this.add(filter.getEmbarkedLabel());
         this.add(filter.getEmbarkedCoboBox());
+
+
+       // System.out.println(Filter.rangePassengerId(890,1,this.passengers));
 
 
     }
