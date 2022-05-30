@@ -102,6 +102,15 @@ public class Filter {
         });
 
         this.button = newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);
+        this.button.addActionListener((e) -> {
+            List<Passenger> p = rangePassengerId(this.passengerIdRangeTextFieldMin.getText(),
+                    this.passengerIdRangeTextFieldMax.getText()
+                    , this.passengers);
+            if (this.passengerNameTextFiled.getText() != "")
+                p = byName(p, this.passengerNameTextFiled.getText());
+
+            System.out.println(p);
+        });
         this.passengers = passengers;
 
     }
