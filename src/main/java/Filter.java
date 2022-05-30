@@ -156,7 +156,7 @@ public class Filter {
 
     private List<Passenger> byTicket(List<Passenger> list, String ticket) {
         List<Passenger> passengers = new LinkedList<>();
-        for (int i = 1; i <= list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getTicket().equals(ticket)) {
                 passengers.add(list.get(i));
             }
@@ -166,7 +166,7 @@ public class Filter {
 
     private List<Passenger> bySibSpNumber(List<Passenger> list, int sibSp) {
         List<Passenger> passengers = new LinkedList<>();
-        for (int i = 1; i <= list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getSibSp() == sibSp) {
                 passengers.add(list.get(i));
             }
@@ -176,7 +176,7 @@ public class Filter {
 
     private List<Passenger> byParchNumber(List<Passenger> list, int parch) {
         List<Passenger> passengers = new LinkedList<>();
-        for (int i = 1; i <= list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getParch() == parch) {
                 passengers.add(list.get(i));
             }
@@ -186,7 +186,7 @@ public class Filter {
 
     private List<Passenger> byCabinNumber(List<Passenger> list, String cabin) {
         List<Passenger> passengers = new LinkedList<>();
-        for (int i = 1; i <= list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getCabin().equals(cabin)) {
                 passengers.add(list.get(i));
             }
