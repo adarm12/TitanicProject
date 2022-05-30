@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 
 public class Filter {
 
-    Font myFont = new Font("Gisha", Font.BOLD, 18);
-
     private JLabel survivedLabel;
     private JComboBox survivedComboBox;
     private JLabel passengerIdRangeLabel;
@@ -98,19 +96,26 @@ public class Filter {
             //do whatever you want on change
         });
 
-        this.button = newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);
+        this.button = CreateNew.newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);
         this.button.addActionListener((e) -> {
             List<Passenger> p = rangePassengerId(this.passengerIdRangeTextFieldMin.getText(),
                     this.passengerIdRangeTextFieldMax.getText()
                     , this.passengers);
+            System.out.println(p.size());
             if (!this.passengerNameTextFiled.getText().equals("")) {
                 p = byName(p, this.passengerNameTextFiled.getText());
             }
             if (!this.ticketNumberTextFiled.getText().equals("")) {
                 p = byTicket(p, this.ticketNumberTextFiled.getText());
             }
-            if (!this.passengerSibSpNumberTextFiled.getText().equals("")) {
+             if (!this.passengerSibSpNumberTextFiled.getText().equals("")) {
                 p = bySibSpNumber(p, Integer.parseInt(this.passengerSibSpNumberTextFiled.getText()));
+            }
+            if (!this.passengerParchSpNumberTextFiled.getText().equals("")) {
+                p = byParchNumber(p, Integer.parseInt(this.passengerParchSpNumberTextFiled.getText()));
+            }
+            if (!this.cabinNumberTextFiled.getText().equals("")) {
+                p = byCabinNumber(p, this.cabinNumberTextFiled.getText());
             }
             System.out.println(p);
         });
@@ -158,7 +163,7 @@ public class Filter {
 
     private List<Passenger> byTicket(List<Passenger> list, String ticket) {
         List<Passenger> passengers = new LinkedList<>();
-        for (int i = 1; i < list.size(); i++) {
+        for (int i = 1; i <= list.size(); i++) {
             if (list.get(i).getTicket().equals(ticket)) {
                 passengers.add(list.get(i));
             }
@@ -168,7 +173,7 @@ public class Filter {
 
     private List<Passenger> bySibSpNumber(List<Passenger> list, int sibSp) {
         List<Passenger> passengers = new LinkedList<>();
-        for (int i = 1; i < list.size(); i++) {
+        for (int i = 1; i <= list.size(); i++) {
             if (list.get(i).getSibSp() == sibSp) {
                 passengers.add(list.get(i));
             }
@@ -176,21 +181,24 @@ public class Filter {
         return passengers;
     }
 
-    public JButton newButton(String text, int x, int y) {
-        button = new JButton(text);
-        button.setBounds(x, y, 250, 70);
-        button.setFont(myFont);
-        button.setFocusable(false);
-        return button;
+    private List<Passenger> byParchNumber(List<Passenger> list, int parch) {
+        List<Passenger> passengers = new LinkedList<>();
+        for (int i = 1; i <= list.size(); i++) {
+            if (list.get(i).getParch() == parch) {
+                passengers.add(list.get(i));
+            }
+        }
+        return passengers;
     }
 
-
-    public Font getMyFont() {
-        return myFont;
-    }
-
-    public void setMyFont(Font myFont) {
-        this.myFont = myFont;
+    private List<Passenger> byCabinNumber(List<Passenger> list, String cabin) {
+        List<Passenger> passengers = new LinkedList<>();
+        for (int i = 1; i <= list.size(); i++) {
+            if (list.get(i).getCabin().equals(cabin)) {
+                passengers.add(list.get(i));
+            }
+        }
+        return passengers;
     }
 
     public JLabel getSurvivedLabel() {

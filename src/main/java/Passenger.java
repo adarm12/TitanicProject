@@ -146,6 +146,14 @@ public class Passenger {
         this.fare = fare;
     }
 
+    public String getCabin() {
+        return cabin;
+    }
+
+    public void setCabin(String cabin) {
+        this.cabin = cabin;
+    }
+
     public char getEmbarked() {
         return embarked;
     }
