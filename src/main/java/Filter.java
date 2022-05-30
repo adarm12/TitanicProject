@@ -29,6 +29,8 @@ public class Filter {
     private JLabel embarkedLabel;
     private JComboBox embarkedCoboBox;
     private JButton button;
+    private JLabel ageLabel;
+    private JTextField ageTextFiled;
 
     private List<Passenger> passengers;
 
@@ -84,10 +86,13 @@ public class Filter {
 
         this.embarkedLabel = CreateNew.newLabel("Embarked:  ", x + Constants.MARGIN_FROM_LEFT + Constants.ANOTHER_MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 16 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.embarkedCoboBox = new JComboBox(Constants.PASSENGER_EMBARKED_OPTIONS);
-        this.embarkedCoboBox.setBounds(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + Constants.SIXTEEN_TIMES * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+        this.embarkedCoboBox.setBounds(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + 16 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
         this.embarkedCoboBox.addActionListener((e) -> {
             //do whatever you want on change
         });
+
+        this.ageLabel = CreateNew.newLabel("Age: ", x + Constants.ANOTHER_MARGIN_FROM_LEFT * 2, y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
+        this.ageTextFiled = CreateNew.newTextField(ageLabel.getX() + Constants.MARGIN_FROM_LEFT * 3, passengerParchNumberLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
         this.button = CreateNew.newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);
         this.button.addActionListener((e) -> {
@@ -101,7 +106,7 @@ public class Filter {
             if (!this.ticketNumberTextFiled.getText().equals("")) {
                 p = byTicket(p, this.ticketNumberTextFiled.getText());
             }
-             if (!this.passengerSibSpNumberTextFiled.getText().equals("")) {
+            if (!this.passengerSibSpNumberTextFiled.getText().equals("")) {
                 p = bySibSpNumber(p, Integer.parseInt(this.passengerSibSpNumberTextFiled.getText()));
             }
             if (!this.passengerParchSpNumberTextFiled.getText().equals("")) {
@@ -109,6 +114,9 @@ public class Filter {
             }
             if (!this.cabinNumberTextFiled.getText().equals("")) {
                 p = byCabinNumber(p, this.cabinNumberTextFiled.getText());
+            }
+            if (!this.ageTextFiled.getText().equals("")) {
+                p = byAge(p, Integer.parseInt(this.ageTextFiled.getText()));
             }
             System.out.println(p);
         });
@@ -188,6 +196,16 @@ public class Filter {
         List<Passenger> passengers = new LinkedList<>();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getCabin().equals(cabin)) {
+                passengers.add(list.get(i));
+            }
+        }
+        return passengers;
+    }
+
+    private List<Passenger> byAge(List<Passenger> list, int age) {
+        List<Passenger> passengers = new LinkedList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getAge() == age) {
                 passengers.add(list.get(i));
             }
         }
@@ -385,4 +403,22 @@ public class Filter {
     public void setPassengers(List<Passenger> passengers) {
         this.passengers = passengers;
     }
+
+    public JLabel getAgeLabel() {
+        return ageLabel;
+    }
+
+    public void setAgeLabel(JLabel ageLabel) {
+        this.ageLabel = ageLabel;
+    }
+
+    public JTextField getAgeTextFiled() {
+        return ageTextFiled;
+    }
+
+    public void setAgeTextFiled(JTextField ageTextFiled) {
+        this.ageTextFiled = ageTextFiled;
+    }
+
+
 }

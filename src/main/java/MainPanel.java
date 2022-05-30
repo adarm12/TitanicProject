@@ -44,6 +44,8 @@ public class MainPanel extends JPanel {
         this.add(filter.getCabinNumberTextFiled());
         this.add(filter.getEmbarkedLabel());
         this.add(filter.getEmbarkedCoboBox());
+        this.add(filter.getAgeLabel());
+        this.add(filter.getAgeTextFiled());
 
 
        // System.out.println(Filter.rangePassengerId(890,1,this.passengers));
