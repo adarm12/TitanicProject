@@ -49,13 +49,6 @@ public class Filter {
             System.out.println("hi");
         });
 
-//        this.button.addActionListener((e) -> {
-//            List<Passenger> p = rangePassengerId(this.passengerIdRangeTextFieldMin.getText(),
-//                    this.passengerIdRangeTextFieldMax.getText()
-//                    , this.passengers);
-//            if (this.passengerNameTextFiled.getText() != "")
-//                p = byName(p, this.passengerNameTextFiled.getText());
-
         this.passengerNameLabel = CreateNew.newLabel("Passenger name: ", x + Constants.MARGIN_FROM_LEFT,
                 y + Constants.MARGIN_FROM_TOP + Constants.EIGHT_TIMES * Constants.MARGIN_FROM_TOP,
                 Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
