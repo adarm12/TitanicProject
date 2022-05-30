@@ -50,17 +50,15 @@ public class Filter {
             System.out.println("hi");
         });
         this.button.addActionListener((e) -> {
-            if (this.passengerIdRangeTextFieldMin.getText() != "" && this.passengerIdRangeTextFieldMax.getText() != "") {
-                this.passengers = rangePassengerId(this.passengerIdRangeTextFieldMin.getText(),
-                        this.passengerIdRangeTextFieldMax.getText()
-                        , this.passengers);
-            }
+            List<Passenger> p = rangePassengerId(this.passengerIdRangeTextFieldMin.getText(),
+                    this.passengerIdRangeTextFieldMax.getText()
+                    , this.passengers);
             if (this.passengerNameTextFiled.getText() != "")
-                this.passengers = byName(this.passengers, this.passengerNameTextFiled.getText());
-            System.out.println(this.passengers);
+                //   p = byName(this.passengerNameTextFiled.getText());
+                System.out.println(p);
         });
 
-        this.passengerNameLabel = newLabel("Passenger name: : ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 8 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 20, Constants.LABEL_HEIGHT);
+        this.passengerNameLabel = newLabel("Passenger name: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 8 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 20, Constants.LABEL_HEIGHT);
         this.passengerNameTextFiled = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + 8 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
 
         this.sexLabel = newLabel("Sex:  ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 12 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 20, Constants.LABEL_HEIGHT);
@@ -96,18 +94,20 @@ public class Filter {
     }
 
     public List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
-        if (startFrom.equals("")) {
-            startFrom = "1";
+        if (startFrom.equals("")){
+            startFrom="1";
+        }if (limitTo.equals("")){
+            limitTo="891";
         }
-        if (limitTo.equals("")) {
-            limitTo = "891";
-        }
-        int min = Integer.parseInt(startFrom);
+         int min = Integer.parseInt(startFrom);
         int max = Integer.parseInt(limitTo);
         if (min > max && max != 0) {
             System.out.println("not vailied");
             return this.passengers.stream().skip(passengers.size()).collect(Collectors.toList());
-        } else {
+
+
+        }
+        else {
             return this.passengers.stream().limit(max).skip(min - 1).collect(Collectors.toList());
         }
 //        return passengers;
@@ -130,13 +130,16 @@ public class Filter {
 //            }
 
 
-    private List<Passenger> byName(List<Passenger> passengers, String name) {
+
+
+    private List<Passenger> byName(String name) {
+        List<Passenger> passengers = new LinkedList<>();
         for (int i = 0; i < this.passengers.size(); i++) {
             if (this.passengers.get(i).getName().contains((name)))
-                this.passengers.add(this.passengers.get(i));
+                passengers.add(this.passengers.get(i));
         }
         return passengers;
-        // return this.passengers.stream().filter().collect(Collectors.toList());
+        //  return this.passengers.stream().filter().collect(Collectors.toList());
     }
 
 
