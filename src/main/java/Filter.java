@@ -71,11 +71,8 @@ public class Filter {
         this.sexComboBox = new JComboBox(Constants.PASSENGER_SEX_OPTIONS);
         this.sexComboBox.setBounds(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + Constants.TWELVE_TIMES * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
         this.sexComboBox.addActionListener((e) -> {
-            System.out.println(this.sexComboBox.getSelectedIndex());
-//            List<Passenger> p2 = bySex(this.passengers,this.sexComboBox.ge);
-//            if (this.passengerNameTextFiled.getText() != "")
-//                p = byName(p, this.passengerNameTextFiled.getText());
-//            System.out.println(p);
+//            List<Passenger> p2 = bySex(this.passengers,this.sexComboBox.getActionCommand());
+
         });
 
         this.passengerSibSpNumberLabel = CreateNew.newLabel("Sibsp number: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 16 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
@@ -85,7 +82,7 @@ public class Filter {
         this.passengerParchSpNumberTextFiled = CreateNew.newTextField(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
         this.ticketNumberLabel = CreateNew.newLabel("Ticket number: ", x + Constants.MARGIN_FROM_LEFT + Constants.ANOTHER_MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 4 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
-        this.ticketNumberTextFiled = CreateNew.newTextField(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + 4 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
+        this.ticketNumberTextFiled = CreateNew.newTextField(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + 4 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
 
         this.fareLabel = CreateNew.newLabel("Ticket price: ", x + Constants.MARGIN_FROM_LEFT + Constants.ANOTHER_MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + Constants.EIGHT_TIMES * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.fareTextField1 = CreateNew.newTextField(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + Constants.EIGHT_TIMES * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
@@ -106,13 +103,18 @@ public class Filter {
             List<Passenger> p = rangePassengerId(this.passengerIdRangeTextFieldMin.getText(),
                     this.passengerIdRangeTextFieldMax.getText()
                     , this.passengers);
-            if (this.passengerNameTextFiled.getText() != "")
+            if (!this.passengerNameTextFiled.getText().equals("")) {
                 p = byName(p, this.passengerNameTextFiled.getText());
-
+            }
+            if (!this.ticketNumberTextFiled.getText().equals("")) {
+                p = byTicket(p, this.ticketNumberTextFiled.getText());
+            }
+            if (!this.passengerSibSpNumberTextFiled.getText().equals("")) {
+                p = bySibSpNumber(p, Integer.parseInt(this.passengerSibSpNumberTextFiled.getText()));
+            }
             System.out.println(p);
         });
         this.passengers = passengers;
-
     }
 
     public List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
@@ -149,6 +151,26 @@ public class Filter {
                 passengers.add(list.get(i));
             } else {
                 passengers = this.passengers;
+            }
+        }
+        return passengers;
+    }
+
+    private List<Passenger> byTicket(List<Passenger> list, String ticket) {
+        List<Passenger> passengers = new LinkedList<>();
+        for (int i = 1; i < list.size(); i++) {
+            if (list.get(i).getTicket().equals(ticket)) {
+                passengers.add(list.get(i));
+            }
+        }
+        return passengers;
+    }
+
+    private List<Passenger> bySibSpNumber(List<Passenger> list, int sibSp) {
+        List<Passenger> passengers = new LinkedList<>();
+        for (int i = 1; i < list.size(); i++) {
+            if (list.get(i).getSibSp() == sibSp) {
+                passengers.add(list.get(i));
             }
         }
         return passengers;
