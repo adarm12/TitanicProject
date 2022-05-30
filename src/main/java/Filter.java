@@ -36,9 +36,12 @@ public class Filter {
 
     public Filter(int x, int y, List<Passenger> passengers) {
 
-        this.passengerIdRangeLabel = newLabel("Passenger ID rang: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 60, Constants.LABEL_HEIGHT);
-        this.passengerIdRangeTextFieldMin = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
-        this.passengerIdRangeTextFieldMax = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 75, passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
+        this.passengerIdRangeLabel = createNew.newLabel("Passenger ID rang: ", x + Constants.MARGIN_FROM_LEFT,
+                y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 60, Constants.LABEL_HEIGHT);
+        this.passengerIdRangeTextFieldMin = createNew.newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1,
+                passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
+        this.passengerIdRangeTextFieldMax = createNew.newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 75,
+                passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
         this.survivedLabel = newLabel("Survived status:  ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 4 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 20, Constants.LABEL_HEIGHT);
         this.survivedComboBox = new JComboBox(Constants.PASSENGER_CLASS_OPTIONS);
@@ -122,27 +125,6 @@ public class Filter {
         //  return this.passengers.stream().filter().collect(Collectors.toList());
     }
 
-    public JTextField newTextField(int x, int y, int width, int height) {
-        JTextField textField = new JTextField();
-        textField.setBounds(x, y, width, height);
-        textField.setFont(myFont);
-        return textField;
-    }
-
-    public JLabel newLabel(String text, int x, int y, int width, int height) {
-        JLabel label = new JLabel(text);
-        label.setBounds(x, y, width, height);
-        label.setFont(myFont);
-        return label;
-    }
-
-    public JButton newButton(String text, int x, int y) {
-        button = new JButton(text);
-        button.setBounds(x, y, 250, 70);
-        button.setFont(myFont);
-        button.setFocusable(false);
-        return button;
-    }
 
     public JComboBox getSurvivedComboBox() {
         return survivedComboBox;
