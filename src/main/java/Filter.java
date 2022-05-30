@@ -54,8 +54,8 @@ public class Filter {
                     this.passengerIdRangeTextFieldMax.getText()
                     , this.passengers);
             if (this.passengerNameTextFiled.getText() != "")
-                //   p = byName(this.passengerNameTextFiled.getText());
-                System.out.println(p);
+                p = byName(p,this.passengerNameTextFiled.getText());
+            System.out.println(p);
         });
 
         this.passengerNameLabel = newLabel("Passenger name: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 8 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 20, Constants.LABEL_HEIGHT);
@@ -94,49 +94,27 @@ public class Filter {
     }
 
     public List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
-        if (startFrom.equals("")){
-            startFrom="1";
-        }if (limitTo.equals("")){
-            limitTo="891";
+        if (startFrom.equals("")) {
+            startFrom = "1";
         }
-         int min = Integer.parseInt(startFrom);
+        if (limitTo.equals("")) {
+            limitTo = "891";
+        }
+        int min = Integer.parseInt(startFrom);
         int max = Integer.parseInt(limitTo);
         if (min > max && max != 0) {
             System.out.println("not vailied");
             return this.passengers.stream().skip(passengers.size()).collect(Collectors.toList());
-
-
-        }
-        else {
+        } else {
             return this.passengers.stream().limit(max).skip(min - 1).collect(Collectors.toList());
         }
-//        return passengers;
     }
-//            int start = 0;
-//            int limit = passengers.size();
-//            if (startFrom != "")
-//                start = Integer.parseInt(startFrom);
-//            if (limitTo != "")
-//                limit = Integer.parseInt(limitTo);
-//
-//            while (start + limit != 0) {
-//                if (start == 0)
-//                    start++;
-//                if (limit >= start)
-//                    return this.passengers.stream().limit(limit).skip(start - 1).collect(Collectors.toList());
-//                else if (limit == 0) {
-//                    return passengers.stream().skip(start).collect(Collectors.toList());
-//                }
-//            }
 
-
-
-
-    private List<Passenger> byName(String name) {
+    private List<Passenger> byName(List<Passenger> list, String name) {
         List<Passenger> passengers = new LinkedList<>();
-        for (int i = 0; i < this.passengers.size(); i++) {
-            if (this.passengers.get(i).getName().contains((name)))
-                passengers.add(this.passengers.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getName().contains((name)))
+                passengers.add(list.get(i));
         }
         return passengers;
         //  return this.passengers.stream().filter().collect(Collectors.toList());
