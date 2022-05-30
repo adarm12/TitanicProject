@@ -36,9 +36,6 @@ public class Filter {
 
     public Filter(int x, int y, List<Passenger> passengers) {
 
-        this.button = newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);
-        this.passengers = passengers;
-
         this.passengerIdRangeLabel = newLabel("Passenger ID rang: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 60, Constants.LABEL_HEIGHT);
         this.passengerIdRangeTextFieldMin = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
         this.passengerIdRangeTextFieldMax = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 75, passengerIdRangeLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
@@ -54,8 +51,10 @@ public class Filter {
                     this.passengerIdRangeTextFieldMax.getText()
                     , this.passengers);
             if (this.passengerNameTextFiled.getText() != "")
-                p = byName(p,this.passengerNameTextFiled.getText());
-            System.out.println(p);
+                p = byName(p, this.passengerNameTextFiled.getText());
+//            this.sexComboBox.addActionListener((e) -> {
+//
+//            });
         });
 
         this.passengerNameLabel = newLabel("Passenger name: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 8 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
@@ -68,28 +67,31 @@ public class Filter {
             //do whatever you want on change
         });
 
-        this.passengerSibSpNumberLabel = newLabel("Sibsp number : ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 16 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH , Constants.LABEL_HEIGHT);
+        this.passengerSibSpNumberLabel = newLabel("Sibsp number : ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 16 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.passengerSibSpNumberTextFiled = newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + 16 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
         this.passengerParchNumberLabel = newLabel("Parch number : ", x + Constants.MARGIN_FROM_LEFT + Constants.ANOTHER_MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.passengerParchSpNumberTextFiled = newTextField(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
         this.ticketNumberLabel = newLabel("Ticket number : ", x + Constants.MARGIN_FROM_LEFT + Constants.ANOTHER_MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 4 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
-        this.ticketNumberTextFiled = newTextField(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + 4 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
+        this.ticketNumberTextFiled = createNew.newTextField(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + 4 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
         this.fareLabel = newLabel("Ticket price : ", x + Constants.MARGIN_FROM_LEFT + Constants.ANOTHER_MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 8 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.fareTextField1 = newTextField(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + 8 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
         this.fareTextField2 = newTextField(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 75, passengerParchNumberLabel.getY() + 8 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
-        this.cabinNumberLabel = newLabel("Cabin number : ", x + Constants.MARGIN_FROM_LEFT + Constants.ANOTHER_MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 12 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH , Constants.LABEL_HEIGHT);
+        this.cabinNumberLabel = newLabel("Cabin number : ", x + Constants.MARGIN_FROM_LEFT + Constants.ANOTHER_MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 12 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.cabinNumberTextFiled = newTextField(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + 12 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
-        this.embarkedLabel = newLabel("Embarked:  ", x + Constants.MARGIN_FROM_LEFT + Constants.ANOTHER_MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 16 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH , Constants.LABEL_HEIGHT);
+        this.embarkedLabel = newLabel("Embarked:  ", x + Constants.MARGIN_FROM_LEFT + Constants.ANOTHER_MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 16 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.embarkedCoboBox = new JComboBox(Constants.PASSENGER_EMBARKED_OPTIONS);
         this.embarkedCoboBox.setBounds(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + 16 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
         this.embarkedCoboBox.addActionListener((e) -> {
             //do whatever you want on change
         });
+
+        this.button = newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);
+        this.passengers = passengers;
 
     }
 
@@ -110,7 +112,7 @@ public class Filter {
         }
     }
 
-    private List<Passenger> byName(List<Passenger> list, String name) {
+    public List<Passenger> byName(List<Passenger> list, String name) {
         List<Passenger> passengers = new LinkedList<>();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().contains((name)))
@@ -119,7 +121,6 @@ public class Filter {
         return passengers;
         //  return this.passengers.stream().filter().collect(Collectors.toList());
     }
-
 
     public JTextField newTextField(int x, int y, int width, int height) {
         JTextField textField = new JTextField();
@@ -143,7 +144,6 @@ public class Filter {
         return button;
     }
 
-
     public JComboBox getSurvivedComboBox() {
         return survivedComboBox;
     }
@@ -152,7 +152,6 @@ public class Filter {
         this.survivedComboBox = survivedComboBox;
     }
 
-
     public JButton getButton() {
         return button;
     }
@@ -160,7 +159,6 @@ public class Filter {
     public void setButton(JButton button) {
         this.button = button;
     }
-
 
     public JLabel getSurvivedLabel() {
         return survivedLabel;
@@ -330,5 +328,3 @@ public class Filter {
         this.embarkedCoboBox = embarkedCoboBox;
     }
 }
-
-
