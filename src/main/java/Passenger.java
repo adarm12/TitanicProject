@@ -1,3 +1,6 @@
+import javafx.scene.control.ComboBox;
+
+import java.awt.event.ActionEvent;
 import java.util.List;
 
 
@@ -22,6 +25,9 @@ public class Passenger {
             if (list[i].equals(""))
                 list[i] = "0";
         }
+//        System.out.println(list.length);
+
+
         this.passengerId = Integer.parseInt(list[Constants.PASSENGER_ID]);
         if (list[Constants.PASSENGER_SURVIVED].equals(Constants.PASSENGER_SURVIVED_1))
             this.survived = true;
@@ -59,7 +65,6 @@ public class Passenger {
         if (valueToCheck > 0) {
             isValid = true;
         }
-//        System.out.println("not valid");
         return isValid;
     }
 
@@ -75,11 +80,22 @@ public class Passenger {
 
     public boolean selectedString(String origin, String stringToCheck) {
         boolean isSame = false;
-        if (origin == stringToCheck) {
-            isSame = true;
-        }
+            if (origin.equals(stringToCheck)) {
+                isSame = true;
+            }
         return isSame;
     }
+
+
+
+
+//    public boolean selectedCombo(ComboBox comboBoxToCheck, String stringToCheck){
+//        boolean isSame = false;
+//        if (comboBoxToCheck.g)
+//
+//        return isSame;
+//    }
+
 
 
 //    public void A(int min, int max) {
