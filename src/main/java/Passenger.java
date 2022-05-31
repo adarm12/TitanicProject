@@ -22,6 +22,8 @@ public class Passenger {
             if (list[i].equals(""))
                 list[i] = "0";
         }
+        System.out.println(list.length);
+
 
         this.passengerId = Integer.parseInt(list[Constants.PASSENGER_ID]);
         if (list[Constants.PASSENGER_SURVIVED].equals(Constants.PASSENGER_SURVIVED_1))
@@ -36,8 +38,7 @@ public class Passenger {
         this.ticket = list[Constants.PASSENGER_TICKET];
         this.fare = Double.parseDouble(list[Constants.PASSENGER_FARE]);
         this.cabin = list[Constants.PASSENGER_CABIN];
-
-        //      this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
+        this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
     }
 
     public String getFormattedName(String string) {
@@ -52,6 +53,35 @@ public class Passenger {
         String name = string.substring(dot + Constants.LETTER_AFTER_DOT) + " " + string.substring(0, comma);
         return (name);
     }
+
+    public boolean isValidValue(double valueToCheck) {
+        boolean isValid = false;
+        if (valueToCheck > 0) {
+            isValid = true;
+        }
+//        System.out.println("not valid");
+        return isValid;
+    }
+
+    public boolean selectedNumber(double origin, double valueToCheck) {
+        boolean isSame = false;
+        if (isValidValue(valueToCheck)) {
+            if (origin == valueToCheck) {
+                isSame = true;
+            }
+        }
+        return isSame;
+    }
+
+    public boolean selectedString(String origin, String stringToCheck) {
+        boolean isSame = false;
+            if (origin == stringToCheck) {
+                isSame = true;
+            }
+        return isSame;
+    }
+
+
 
 //    public void A(int min, int max) {
 //        int R;
@@ -176,6 +206,6 @@ public class Passenger {
                 ", fare=" + fare +
                 ", cabin='" + cabin + '\'' +
                 ", embarked=" + embarked +
-                '}'+"\n";
+                '}' + "\n";
     }
 }

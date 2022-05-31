@@ -118,7 +118,9 @@ public class Filter {
             if (!this.ageTextFiled.getText().equals("")) {
                 p = byAge(p, Integer.parseInt(this.ageTextFiled.getText()));
             }
+            System.out.println(p.size());
             System.out.println(p);
+
         });
         this.passengers = passengers;
     }
@@ -162,6 +164,7 @@ public class Filter {
         return passengers;
     }
 
+
     private List<Passenger> byTicket(List<Passenger> list, String ticket) {
         List<Passenger> passengers = new LinkedList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -173,43 +176,29 @@ public class Filter {
     }
 
     private List<Passenger> bySibSpNumber(List<Passenger> list, int sibSp) {
-        List<Passenger> passengers = new LinkedList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getSibSp() == sibSp) {
-                passengers.add(list.get(i));
-            }
-        }
-        return passengers;
+        return list.stream().filter(passengers -> passengers.selectedNumber(passengers.getSibSp(), sibSp)).collect(Collectors.toList());
     }
+
 
     private List<Passenger> byParchNumber(List<Passenger> list, int parch) {
-        List<Passenger> passengers = new LinkedList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getParch() == parch) {
-                passengers.add(list.get(i));
-            }
-        }
-        return passengers;
+        return list.stream().filter(passengers -> passengers.selectedNumber(passengers.getParch(), parch)).collect(Collectors.toList());
     }
+
 
     private List<Passenger> byCabinNumber(List<Passenger> list, String cabin) {
-        List<Passenger> passengers = new LinkedList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getCabin().equals(cabin)) {
-                passengers.add(list.get(i));
-            }
-        }
-        return passengers;
+        return list.stream().filter(passengers -> passengers.selectedString(passengers.getCabin(), cabin)).collect(Collectors.toList());
     }
+//        List<Passenger> passengers = new LinkedList<>();
+//        for (int i = 0; i < list.size(); i++) {
+//            if (list.get(i).getCabin().equals(cabin)) {
+//                passengers.add(list.get(i));
+//            }
+//        }
+//        return passengers;
+//    }
 
     private List<Passenger> byAge(List<Passenger> list, int age) {
-        List<Passenger> passengers = new LinkedList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getAge() == age) {
-                passengers.add(list.get(i));
-            }
-        }
-        return passengers;
+        return list.stream().filter(passengers -> passengers.selectedNumber(passengers.getAge(), age)).collect(Collectors.toList());
     }
 
     public JLabel getSurvivedLabel() {
