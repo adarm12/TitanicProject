@@ -85,16 +85,6 @@ public class Passenger {
 
 
 
-
-//    public boolean selectedCombo(ComboBox comboBoxToCheck, String stringToCheck){
-//        boolean isSame = false;
-//        if (comboBoxToCheck.g)
-//
-//        return isSame;
-//    }
-
-
-
 //    public void A(int min, int max) {
 //        int R;
 //        while (min + max != 0) {

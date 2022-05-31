@@ -73,6 +73,7 @@ public class Filter {
 //            }
 //        });
 
+
         this.passengerSibSpNumberLabel = CreateNew.newLabel("Sibsp number: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 16 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.passengerSibSpNumberTextFiled = CreateNew.newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + 16 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
@@ -100,36 +101,42 @@ public class Filter {
         this.ageTextFiled = CreateNew.newTextField(ageLabel.getX() + Constants.MARGIN_FROM_LEFT * 3, passengerParchNumberLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
         this.button = CreateNew.newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);
-        this.button.addActionListener((e) -> {
-            List<Passenger> p = rangePassengerId(this.passengerIdRangeTextFieldMin.getText(),
-                    this.passengerIdRangeTextFieldMax.getText()
-                    , this.passengers);
-            System.out.println(p.size());
-            if (!this.passengerNameTextFiled.getText().equals("")) {
-                p = byName(p, this.passengerNameTextFiled.getText());
-            }
-            if (!this.ticketNumberTextFiled.getText().equals("")) {
-                p = byTicket(p, this.ticketNumberTextFiled.getText());
-            }
-            if (!this.passengerSibSpNumberTextFiled.getText().equals("")) {
-                p = bySibSpNumber(p, Integer.parseInt(this.passengerSibSpNumberTextFiled.getText()));
-            }
-            if (!this.passengerParchSpNumberTextFiled.getText().equals("")) {
-                p = byParchNumber(p, Integer.parseInt(this.passengerParchSpNumberTextFiled.getText()));
-            }
-            if (!this.cabinNumberTextFiled.getText().equals("")) {
-                p = byCabinNumber(p, this.cabinNumberTextFiled.getText());
-            }
-            if (!this.ageTextFiled.getText().equals("")) {
-                p = byAge(p, Integer.parseInt(this.ageTextFiled.getText()));
-            }
-//           this.sexComboBox.addActionListener(MainPanel);
-            System.out.println(p.size());
-            System.out.println(p);
-
+//        this.sexComboBox.addActionListener((ee) -> {
+            this.button.addActionListener((e) -> {
+                List<Passenger> p = rangePassengerId(this.passengerIdRangeTextFieldMin.getText(),
+                        this.passengerIdRangeTextFieldMax.getText()
+                        , this.passengers);
+                System.out.println(p.size());
+                if (!this.passengerNameTextFiled.getText().equals("")) {
+                    p = byName(p, this.passengerNameTextFiled.getText());
+                }
+                if (!this.ticketNumberTextFiled.getText().equals("")) {
+                    p = byTicket(p, this.ticketNumberTextFiled.getText());
+                }
+                if (!this.passengerSibSpNumberTextFiled.getText().equals("")) {
+                    p = bySibSpNumber(p, Integer.parseInt(this.passengerSibSpNumberTextFiled.getText()));
+                }
+                if (!this.passengerParchSpNumberTextFiled.getText().equals("")) {
+                    p = byParchNumber(p, Integer.parseInt(this.passengerParchSpNumberTextFiled.getText()));
+                }
+                if (!this.cabinNumberTextFiled.getText().equals("")) {
+                    p = byCabinNumber(p, this.cabinNumberTextFiled.getText());
+                }
+                if (!this.ageTextFiled.getText().equals("")) {
+                    p = byAge(p, Integer.parseInt(this.ageTextFiled.getText()));
+                }
+//                if (ee.getSource() == this.sexComboBox) {
+//                    if (this.sexComboBox.getSelectedIndex() != 0) {
+//                        p = bySex(p, (String) this.sexComboBox.getSelectedItem());
+//                        System.out.println(p.size());
+//                        System.out.println(p);
+//                    }
+//                }
+//            });
         });
         this.passengers = passengers;
     }
+
 
     public List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
         if (startFrom.equals("") || startFrom.contains("-")) {
@@ -177,6 +184,8 @@ public class Filter {
 //        }
 //        return passengers;
 //    }
+
+
     private List<Passenger> bySex(List<Passenger> list, String sex) {
         return list.stream().filter(passengers -> passengers.selectedString(passengers.getSex(), sex)).collect(Collectors.toList());
     }
