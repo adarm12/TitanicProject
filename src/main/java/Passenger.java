@@ -25,8 +25,6 @@ public class Passenger {
             if (list[i].equals(""))
                 list[i] = "0";
         }
-//        System.out.println(list.length);
-
 
         this.passengerId = Integer.parseInt(list[Constants.PASSENGER_ID]);
         if (list[Constants.PASSENGER_SURVIVED].equals(Constants.PASSENGER_SURVIVED_1))
