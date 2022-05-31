@@ -25,14 +25,11 @@ public class Passenger {
             if (list[i].equals(""))
                 list[i] = "0";
         }
-//        System.out.println(list.length);
-
 
         this.passengerId = Integer.parseInt(list[Constants.PASSENGER_ID]);
         if (list[Constants.PASSENGER_SURVIVED].equals(Constants.PASSENGER_SURVIVED_1))
             this.survived = true;
         this.pClass = Integer.parseInt(list[Constants.PASSENGER_P_CLASS]);
-        // String fullName = list[Constants.PASSENGER_FIRST_NAME] + list[Constants.PASSENGER_LAST_NAME];
         this.name = list[Constants.PASSENGER_FIRST_NAME] + list[Constants.PASSENGER_LAST_NAME];
         this.sex = list[Constants.PASSENGER_SEX];
         this.age = Double.parseDouble(list[Constants.PASSENGER_AGE]);
@@ -41,7 +38,11 @@ public class Passenger {
         this.ticket = list[Constants.PASSENGER_TICKET];
         this.fare = Double.parseDouble(list[Constants.PASSENGER_FARE]);
         this.cabin = list[Constants.PASSENGER_CABIN];
-//        this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
+        if (list.length == 12)
+            System.out.println(this.passengerId);
+        else
+            this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
+
     }
 
     public String getFormattedName(String string) {
