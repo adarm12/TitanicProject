@@ -1,3 +1,6 @@
+import javafx.scene.control.ComboBox;
+
+import java.awt.event.ActionEvent;
 import java.util.List;
 
 
@@ -22,7 +25,7 @@ public class Passenger {
             if (list[i].equals(""))
                 list[i] = "0";
         }
-        System.out.println(list.length);
+//        System.out.println(list.length);
 
 
         this.passengerId = Integer.parseInt(list[Constants.PASSENGER_ID]);
@@ -38,7 +41,7 @@ public class Passenger {
         this.ticket = list[Constants.PASSENGER_TICKET];
         this.fare = Double.parseDouble(list[Constants.PASSENGER_FARE]);
         this.cabin = list[Constants.PASSENGER_CABIN];
-        this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
+//        this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
     }
 
     public String getFormattedName(String string) {
@@ -59,7 +62,6 @@ public class Passenger {
         if (valueToCheck > 0) {
             isValid = true;
         }
-//        System.out.println("not valid");
         return isValid;
     }
 
@@ -75,11 +77,21 @@ public class Passenger {
 
     public boolean selectedString(String origin, String stringToCheck) {
         boolean isSame = false;
-            if (origin == stringToCheck) {
+            if (origin.equals(stringToCheck)) {
                 isSame = true;
             }
         return isSame;
     }
+
+
+
+
+//    public boolean selectedCombo(ComboBox comboBoxToCheck, String stringToCheck){
+//        boolean isSame = false;
+//        if (comboBoxToCheck.g)
+//
+//        return isSame;
+//    }
 
 
 

@@ -20,7 +20,7 @@ public class MainPanel extends JPanel {
         this.passengers = readFromFile(file);
 //        System.out.println(this.passengers.get(3));
 
-        Filter filter = new Filter(30,50, this.passengers);
+        Filter filter = new Filter(30,50, this.passengers, this);
         this.add(filter.getButton());
         this.add(filter.getPassengerIdRangeLabel());
         this.add(filter.getPassengerIdRangeTextFieldMin());

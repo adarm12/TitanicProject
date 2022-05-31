@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +35,7 @@ public class Filter {
 
     private List<Passenger> passengers;
 
-    public Filter(int x, int y, List<Passenger> passengers) {
+    public Filter(int x, int y, List<Passenger> passengers, JPanel mainPanel) {
 
         this.passengerIdRangeLabel = CreateNew.newLabel("Passenger ID rang: ", x + Constants.MARGIN_FROM_LEFT,
                 y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH + 60, Constants.LABEL_HEIGHT);
@@ -63,10 +64,14 @@ public class Filter {
                 Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.sexComboBox = new JComboBox(Constants.PASSENGER_SEX_OPTIONS);
         this.sexComboBox.setBounds(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + Constants.TWELVE_TIMES * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
-        this.sexComboBox.addActionListener((e) -> {
-//            List<Passenger> p2 = bySex(this.passengers,this.sexComboBox.getActionCommand());
-
-        });
+//        this.sexComboBox.addActionListener((e) -> {
+//            if (e.getSource() == this.sexComboBox) {
+//                if (this.sexComboBox.getSelectedIndex() != 0) {
+//                    System.out.println(this.sexComboBox.getSelectedItem());
+//
+//                }
+//            }
+//        });
 
         this.passengerSibSpNumberLabel = CreateNew.newLabel("Sibsp number: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 16 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.passengerSibSpNumberTextFiled = CreateNew.newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + 16 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
@@ -118,6 +123,7 @@ public class Filter {
             if (!this.ageTextFiled.getText().equals("")) {
                 p = byAge(p, Integer.parseInt(this.ageTextFiled.getText()));
             }
+//           this.sexComboBox.addActionListener(MainPanel);
             System.out.println(p.size());
             System.out.println(p);
 
@@ -152,27 +158,31 @@ public class Filter {
         //  return this.passengers.stream().filter().collect(Collectors.toList());
     }
 
+//    public void checkSex (ActionEvent e) {
+//        if (e.getSource() == sexComboBox) {
+//            if (this.sexComboBox.getSelectedIndex() != 0) {
+//                System.out.println(sexComboBox.getSelectedItem());
+//            }
+//        }
+//    }
+
+    //    private List<Passenger> bySex(List<Passenger> list, String sex) {
+//        List<Passenger> passengers = new LinkedList<>();
+//        for (int i = 0; i < list.size(); i++) {
+//            if (list.get(i).getSex().equals(sex)) {
+//                passengers.add(list.get(i));
+//            } else {
+//                passengers = this.passengers;
+//            }
+//        }
+//        return passengers;
+//    }
     private List<Passenger> bySex(List<Passenger> list, String sex) {
-        List<Passenger> passengers = new LinkedList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getSex().equals(sex)) {
-                passengers.add(list.get(i));
-            } else {
-                passengers = this.passengers;
-            }
-        }
-        return passengers;
+        return list.stream().filter(passengers -> passengers.selectedString(passengers.getSex(), sex)).collect(Collectors.toList());
     }
 
-
     private List<Passenger> byTicket(List<Passenger> list, String ticket) {
-        List<Passenger> passengers = new LinkedList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getTicket().equals(ticket)) {
-                passengers.add(list.get(i));
-            }
-        }
-        return passengers;
+        return list.stream().filter(passengers -> passengers.selectedString(passengers.getTicket(), ticket)).collect(Collectors.toList());
     }
 
     private List<Passenger> bySibSpNumber(List<Passenger> list, int sibSp) {
@@ -188,14 +198,6 @@ public class Filter {
     private List<Passenger> byCabinNumber(List<Passenger> list, String cabin) {
         return list.stream().filter(passengers -> passengers.selectedString(passengers.getCabin(), cabin)).collect(Collectors.toList());
     }
-//        List<Passenger> passengers = new LinkedList<>();
-//        for (int i = 0; i < list.size(); i++) {
-//            if (list.get(i).getCabin().equals(cabin)) {
-//                passengers.add(list.get(i));
-//            }
-//        }
-//        return passengers;
-//    }
 
     private List<Passenger> byAge(List<Passenger> list, int age) {
         return list.stream().filter(passengers -> passengers.selectedNumber(passengers.getAge(), age)).collect(Collectors.toList());
