@@ -14,7 +14,7 @@ public class CreateNew extends JComboBox {
     }
 
     public static JTextField newTextField(int x, int y, int width, int height) {
-        JTextField textField = new JTextField(1);
+        JTextField textField = new JTextField();
         textField.setBounds(x, y, width, height);
         textField.setFont(myFont);
         return textField;
