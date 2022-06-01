@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,6 @@ public class FilterPassengers {
                             JComboBox embarkedCoboBox, JTextField ageTextFiled) {
 
         this.passengers = passengers;
-
         this.searchButton = CreateNew.newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);
         this.searchButton.addActionListener((e) -> {
             List<Passenger> p = rangePassengerId(passengerIdRangeTextFieldMin.getText(),
@@ -32,24 +32,24 @@ public class FilterPassengers {
                 p = byName(p, passengerNameTextFiled.getText());
             System.out.println("p2: " + p.size());
 
-//            if (!ticketNumberTextFiled.equals(""))
-//                p = byTicket(p, ticketNumberTextFiled.getText());
-//            System.out.println("p3: " + p.size());
-//
-//            if (!passengerSibSpNumberTextFiled.getText().equals(""))
-//                p = bySibSpNumber(p, Integer.parseInt(passengerSibSpNumberTextFiled.getText()));
-//
-//            System.out.println("p4: " + p.size());
+            if (!ticketNumberTextFiled.getText().equals(""))
+                p = byTicket(p, ticketNumberTextFiled.getText());
+            System.out.println("p3: " + p.size());
+
+            if (!passengerSibSpNumberTextFiled.getText().equals(""))
+                p = bySibSpNumber(p, Integer.parseInt(passengerSibSpNumberTextFiled.getText()));
+
+            System.out.println("p4: " + p.size());
 
             if (!passengerParchSpNumberTextFiled.getText().equals(""))
                 p = byParchNumber(p, Integer.parseInt(passengerParchSpNumberTextFiled.getText()));
-
+            System.out.println("p5: " + p.size());
             if (!cabinNumberTextFiled.getText().equals(""))
                 p = byCabinNumber(p, cabinNumberTextFiled.getText());
 
-            if (!ageTextFiled.getText().equals(""))
-                p = byAge(p, Integer.parseInt(ageTextFiled.getText()));
-
+//            if (!ageTextFiled.getText().equals(""))
+//                p = byAge(p, Integer.parseInt(ageTextFiled.getText()));
+//            System.out.println("age: " + p.size());
 
             System.out.println(p.size());
         });
@@ -57,14 +57,20 @@ public class FilterPassengers {
 
 
     public List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
-        if (startFrom.equals("") || startFrom.contains("-")) {
-            startFrom = "1";
+        int min = 1;
+        int max = 891;
+        try {
+            if (startFrom.equals("") || startFrom.contains("-")) {
+                startFrom = "1";
+            }
+            if (limitTo.equals("") || limitTo.contains("-")) {
+                limitTo = "891";
+            }
+            min = Integer.parseInt(startFrom);
+            max = Integer.parseInt(limitTo);
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
         }
-        if (limitTo.equals("") || limitTo.contains("-")) {
-            limitTo = "891";
-        }
-        int min = Integer.parseInt(startFrom);
-        int max = Integer.parseInt(limitTo);
         if (min > max && max != 0) {
             System.out.println("not vailied");
             return this.passengers.stream().skip(passengers.size()).collect(Collectors.toList());
@@ -120,6 +126,7 @@ public class FilterPassengers {
 
     public boolean selectedNumber(double origin, double valueToCheck) {
         boolean isSame = false;
+
         if (isValidValue(valueToCheck)) {
             if (origin == valueToCheck) {
                 isSame = true;
