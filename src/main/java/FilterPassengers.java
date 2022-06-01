@@ -52,7 +52,10 @@ public class FilterPassengers {
                 this.passengers = byTicket(this.passengers, ticketNumberTextFiled.getText());
             System.out.println("p3: " + this.passengers.size());
 
-            //מחיר
+            if (!fareTextField1.equals("") && !fareTextField2.equals(""))
+            this.passengers = rangeTicketPrice(fareTextField1.getText(),
+                    fareTextField2.getText(), this.passengers);
+            System.out.println("p1: " + this.passengers.size());
 
             if (!cabinNumberTextFiled.getText().equals(""))
                 this.passengers = byCabinNumber(this.passengers, cabinNumberTextFiled.getText());
@@ -66,18 +69,18 @@ public class FilterPassengers {
         });
     }
 
-    public List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
+    private List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
         if (startFrom.equals(""))
             startFrom = "1";
         if (limitTo.equals(""))
             limitTo = "891";
-        if (isValidRangeId(startFrom, limitTo)) {
+        if (isValidRange(startFrom, limitTo)) {
             return this.passengers.stream().limit(Integer.parseInt(limitTo)).skip(Integer.parseInt(startFrom) - 1).collect(Collectors.toList());
         }
         return passengers;
     }
 
-    public boolean isValidRangeId(String min, String max) {
+    private boolean isValidRange(String min, String max) {
         boolean isValid = false;
         if (isOnlyNumbers(min) && isOnlyNumbers(max)) {
             int minNumber = Integer.parseInt(min);
@@ -88,7 +91,7 @@ public class FilterPassengers {
         return isValid;
     }
 
-    public boolean isOnlyNumbers(String number) {
+    private boolean isOnlyNumbers(String number) {
         boolean only = false;
         int counter = 0;
         for (int i = 0; i < number.length(); i++) {
@@ -100,7 +103,7 @@ public class FilterPassengers {
         return only;
     }
 
-    public List<Passenger> byName(List<Passenger> list, String name) {
+    private List<Passenger> byName(List<Passenger> list, String name) {
         List<Passenger> passengers = new LinkedList<>();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().contains((name)))
@@ -111,7 +114,7 @@ public class FilterPassengers {
     }
 
     private List<Passenger> byPclass(List<Passenger> list, int pClass) {
-        return list.stream().filter(passengers -> selectedNumber(passengers.getpClass(),pClass)).collect(Collectors.toList());
+        return list.stream().filter(passengers -> selectedNumber(passengers.getpClass(), pClass)).collect(Collectors.toList());
     }
 
     private List<Passenger> bySex(List<Passenger> list, String sex) {
@@ -130,7 +133,19 @@ public class FilterPassengers {
         return list.stream().filter(passengers -> selectedString(passengers.getTicket(), ticket)).collect(Collectors.toList());
     }
 
-// מחיר
+    private List<Passenger> rangeTicketPrice(String startFrom, String limitTo, List<Passenger> passengers) {
+        if (isValidRange(startFrom, limitTo)) {
+            return passengers.stream().filter( -> selectedString(passengers.getCabin(), cabin)).collect(Collectors.toList());
+        }
+        return passengers;
+    }
+
+    public List<Passenger> byFare(String min, String max, List<Passenger> passengers) {
+        return passengers.stream().filter(Passenger -> Passenger.rangeFare(Double.parseDouble(min), Double.parseDouble(max))).collect(Collectors.toList());
+    }
+
+
+
 
     private List<Passenger> byCabinNumber(List<Passenger> list, String cabin) {
         return list.stream().filter(passengers -> selectedString(passengers.getCabin(), cabin)).collect(Collectors.toList());
@@ -145,7 +160,7 @@ public class FilterPassengers {
 //    }
 
 
-    public boolean isValidValue(int valueToCheck) {
+    private boolean isValidValue(int valueToCheck) {
         boolean isValid = false;
         if (valueToCheck > 0) {
             isValid = true;
@@ -153,7 +168,7 @@ public class FilterPassengers {
         return isValid;
     }
 
-    public boolean selectedNumber(int origin, int valueToCheck) {
+    private boolean selectedNumber(int origin, int valueToCheck) {
         boolean isSame = false;
 
         if (isValidValue(valueToCheck)) {
@@ -164,7 +179,7 @@ public class FilterPassengers {
         return isSame;
     }
 
-    public boolean selectedString(String origin, String stringToCheck) {
+    private boolean selectedString(String origin, String stringToCheck) {
         boolean isSame = false;
         if (origin.equals(stringToCheck)) {
             isSame = true;
@@ -172,12 +187,25 @@ public class FilterPassengers {
         return isSame;
     }
 
-    public boolean selectedChar(char origin, String charToCheck) {
+    private boolean selectedChar(char origin, String charToCheck) {
         boolean isSame = false;
         if (origin == charToCheck.charAt(0)) {
             isSame = true;
         }
         return isSame;
+    }
+
+    public boolean rangeFare(double min, double max) {
+        if (min == 0 && max > 0) {
+            return this.passengers.fa <= max;
+        } else if (min > 0 && max == 0) {
+            return this.fare >= min;
+        } else if (min > 0 && max > 0 && max > min) {
+            return this.fare >= min && this.fare < max;
+        } else if (min == max && min != 0) {
+            return this.fare == max;
+        }
+        return true;
     }
 
     public List<Passenger> getPassengers() {
