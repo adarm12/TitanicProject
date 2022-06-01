@@ -1,6 +1,7 @@
 public class Constants {
     public static final String PATH_TO_DATA_FILE = "src/main/resources/titanic.csv";
-    public static final String PATH_TO_NEW_FILE = "C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\titanic";
+    public static final String PATH_TO_NEW_FILE_SHANIT = "C:\\Users\\shani\\Desktop\\לימודים שנה א\\מדמח\\קבצים תוכנית\\titanic";
+    public static final String PATH_TO_NEW_FILE_ADAR = "C:\\Users\\adarm\\Desktop\\טיטאניק קבצים";
 
     public static final int WINDOW_WIDTH = 1420;
     public static final int WINDOW_HEIGHT = 900;
@@ -22,7 +23,7 @@ public class Constants {
     public static final int MARGIN_FROM_LEFT_TWO = 400;
     public static final int MARGIN_FROM_LEFT_THREE = 20;
     public static final int LABEL_WIDTH = 150, LABEL_HEIGHT = 30;
-    public static final int LABEL_WIDTH_MESSAGE, LABEL_WIDTH_MESSAGE= , LABEL_WIDTH_MESSAGE = 250, LABEL_HEIGHT_MESSAGE = 100;
+    public static final int LABEL_X_MESSAGE = 1200, LABEL_Y_MESSAGE = 500 , LABEL_WIDTH_MESSAGE = 400, LABEL_HEIGHT_MESSAGE = 100;
     public static final int COMBO_BOX_WIDTH = 80, COMBO_BOX_HEIGHT = 30;
     public static final int BUTTON_WIDTH = 250, BUTTON_HEIGHT = 70;
 

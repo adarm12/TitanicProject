@@ -95,7 +95,7 @@ public class MainPanel extends JPanel {
 
 
         try {
-            writeToNewFile(this.passengers, Constants.PATH_TO_NEW_FILE, this.counter);
+            writeToNewFile(this.passengers, Constants.PATH_TO_NEW_FILE_SHANIT, this.counter);
             this.counter++;
 
         } catch (IOException e) {
@@ -156,7 +156,7 @@ public class MainPanel extends JPanel {
 
     public void writeToNewFile(List<Passenger> passengerList, String path, int counter) throws IOException {
         try {
-            FileWriter fileWriter = new FileWriter(Constants.PATH_TO_NEW_FILE + counter + ".csv");
+            FileWriter fileWriter = new FileWriter(Constants.PATH_TO_NEW_FILE_SHANIT + counter + ".csv");
             fileWriter.write("\n");
 
             int i = 0;

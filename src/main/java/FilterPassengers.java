@@ -55,7 +55,7 @@ public class FilterPassengers {
             if (embarkedCoboBox.getSelectedIndex() != 0) {
                 this.passengers = byEmbarked(this.passengers, (String) embarkedCoboBox.getSelectedItem());
             }
-            this.messageForUser = CreateNew.newLabel("", 100, 700, Constants.LABEL_WIDTH, 80);
+            this.messageForUser = CreateNew.newLabel("", Constants.LABEL_X_MESSAGE, Constants.LABEL_Y_MESSAGE, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT_MESSAGE);
             this.survivedPassengers = this.passengers.stream().filter(Passenger::isSurvived).collect(Collectors.toList());
             this.messageForUser.setText("passengers: " + this.passengers.size() + " (survived: " + this.survivedPassengers.size()+ ")");
             System.out.println(this.messageForUser.getText());

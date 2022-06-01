@@ -50,34 +50,6 @@ public class Passenger {
         return (name);
     }
 
-
-//    public void A(int min, int max) {
-//        int R;
-//        while (min + max != 0) {
-//            if (min == 0 && max > min)
-//                R = max;
-//            else if (max == 0 && min)
-//            {
-//
-//            }
-//        }
-//    }
-//    public boolean isSameSex(String sex){
-//        if (sex.equals("All")){
-//            return true;
-//        }
-//        return this.sex.equals(sex);// return false
-//    }
-    public String bySex(String sex){
-        if (sex.equals("male")){
-            return "male";
-        }else if (sex.equals("female")){
-            return "female";
-        }
-        else {
-            return "All";
-        }
-    }
     public String changeToCSV() {
         return this.passengerId + "," + this.isSurvived() + "," + this.pClass + "," + this.name + "," +
                 this.sex + "," + this.age + "," + this.sibSp + "," + this.parch + "," + this.ticket +
