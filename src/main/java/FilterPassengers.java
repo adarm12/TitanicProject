@@ -57,26 +57,39 @@ public class FilterPassengers {
 
 
     public List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
-        int min = 1;
-        int max = 891;
-        try {
-            if (startFrom.equals("") || startFrom.contains("-")) {
-                startFrom = "1";
-            }
-            if (limitTo.equals("") || limitTo.contains("-")) {
-                limitTo = "891";
-            }
-            min = Integer.parseInt(startFrom);
-            max = Integer.parseInt(limitTo);
-        } catch (ArithmeticException e) {
-            e.printStackTrace();
+        if (startFrom.equals(""))
+            startFrom = "1";
+        if (limitTo.equals(""))
+            limitTo = "891";
+        if (isValidRangeId(startFrom, limitTo)) {
+            return this.passengers.stream().limit(Integer.parseInt(limitTo))
+                    .skip(Integer.parseInt(startFrom)- 1).collect(Collectors.toList());
+
         }
-        if (min > max && max != 0) {
-            System.out.println("not vailied");
-            return this.passengers.stream().skip(passengers.size()).collect(Collectors.toList());
-        } else {
-            return this.passengers.stream().limit(max).skip(min - 1).collect(Collectors.toList());
+        return passengers;
+    }
+
+    public boolean isValidRangeId(String min, String max) {
+        boolean isValid = false;
+        if (isOnlyNumbers(min) && isOnlyNumbers(max)) {
+            int minNumber = Integer.parseInt(min);
+            int maxNumber = Integer.parseInt(max);
+            if (minNumber > 0 && maxNumber > 0 && maxNumber > minNumber)
+                isValid = true;
         }
+        return isValid;
+    }
+
+    public boolean isOnlyNumbers(String number) {
+        boolean only = false;
+        int counter = 0;
+        for (int i = 0; i < number.length(); i++) {
+            if (Character.isDigit(number.charAt(i)))
+                counter++;
+        }
+        if (counter == number.length())
+            only = true;
+        return only;
     }
 
     public List<Passenger> byName(List<Passenger> list, String name) {

@@ -39,27 +39,6 @@ public class Passenger {
 
     }
 
-    public boolean isValidRangeId(int min, int max) {
-        boolean isValid = false;
-
-
-        if (min > 0 && max > 0 && max > min)
-            isValid = true;
-        return isValid;
-    }
-
-    public boolean isOnlyNumbers(String number) {
-        boolean only = false;
-        int counter = 0;
-        for (int i = 0; i < number.length(); i++) {
-            if (Character.isDigit(number.charAt(i)))
-                counter++;
-        }
-        if (counter == number.length())
-            only = true;
-        return only;
-    }
-
     public String getFormattedName(String string) {
         int comma = 0; // פסיק
         int dot = 0;
