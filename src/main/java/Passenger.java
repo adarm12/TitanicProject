@@ -1,7 +1,3 @@
-import javafx.scene.control.ComboBox;
-
-import java.awt.event.ActionEvent;
-import java.util.List;
 
 
 public class Passenger {
@@ -38,12 +34,19 @@ public class Passenger {
         this.ticket = list[Constants.PASSENGER_TICKET];
         this.fare = Double.parseDouble(list[Constants.PASSENGER_FARE]);
         this.cabin = list[Constants.PASSENGER_CABIN];
-        if (list.length == 12)
-            System.out.println(this.passengerId);
-        else
+        if (list.length != Constants.PASSENGER_EMBARKED)
             this.embarked = (list[Constants.PASSENGER_EMBARKED].charAt(0));
 
     }
+
+    public boolean isValidRangeId(int min, int max)
+    {
+        boolean isValid = false;
+        if (min > 0 && max > 0 && max > min)
+                isValid = true;
+    return isValid;
+    }
+
 
     public String getFormattedName(String string) {
         int comma = 0; // פסיק
@@ -57,33 +60,6 @@ public class Passenger {
         String name = string.substring(dot + Constants.LETTER_AFTER_DOT) + " " + string.substring(0, comma);
         return (name);
     }
-
-    public boolean isValidValue(double valueToCheck) {
-        boolean isValid = false;
-        if (valueToCheck > 0) {
-            isValid = true;
-        }
-        return isValid;
-    }
-
-    public boolean selectedNumber(double origin, double valueToCheck) {
-        boolean isSame = false;
-        if (isValidValue(valueToCheck)) {
-            if (origin == valueToCheck) {
-                isSame = true;
-            }
-        }
-        return isSame;
-    }
-
-    public boolean selectedString(String origin, String stringToCheck) {
-        boolean isSame = false;
-            if (origin.equals(stringToCheck)) {
-                isSame = true;
-            }
-        return isSame;
-    }
-
 
 
 //    public void A(int min, int max) {

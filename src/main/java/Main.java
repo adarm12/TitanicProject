@@ -2,8 +2,6 @@ import javax.swing.*;
 
 class Main extends JFrame {
 
-
-
     public Main() {
         this.setTitle("Titanic Passengers Data");
         this.setLayout(null);
@@ -17,6 +15,4 @@ class Main extends JFrame {
     public static void main(String[] args) {
         new Main();
     }
-
-
 }

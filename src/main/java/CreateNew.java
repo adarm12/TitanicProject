@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CreateNew {
+public class CreateNew extends JComboBox {
     public static final Font myFont = new Font("Gisha", Font.BOLD, 18);
 
 
