@@ -43,6 +43,10 @@ public class FilterPassengers {
 
             System.out.println("p4: " + this.passengers.size());
 
+            if (sexComboBox.getSelectedIndex() != 0) {
+                this.passengers = bySex(this.passengers, (String) sexComboBox.getSelectedItem());
+            }
+            System.out.println("p5: " + this.passengers.size());
 
             if (!passengerParchSpNumberTextFiled.getText().equals(""))
                 this.passengers = byParchNumber(this.passengers, Integer.parseInt(passengerParchSpNumberTextFiled.getText()));
@@ -52,16 +56,6 @@ public class FilterPassengers {
 
 
             System.out.println(this.passengers.size());
-        });
-    }
-
-    public void addAction(JComboBox box, List<Passenger> passengers) {
-        box.addActionListener((e) -> {
-            if (e.getSource() == box) {
-                if (box.getSelectedIndex() != 0) {
-                    this.passengers = bySex(this.passengers, (String) box.getSelectedItem());
-                }
-            }
         });
     }
 
