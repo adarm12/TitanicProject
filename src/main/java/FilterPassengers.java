@@ -3,23 +3,24 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class F {
+public class FilterPassengers {
 
     private List<Passenger> passengers;
     private JButton searchButton;
 
-    public F(List<Passenger> passengers, JComboBox survivedComboBox, JTextField passengerIdRangeTextFieldMin,
-             JTextField passengerIdRangeTextFieldMax, JTextField passengerNameTextFiled, JComboBox sexComboBox,
-             JTextField passengerSibSpNumberTextFiled, JTextField passengerParchSpNumberTextFiled, JTextField ticketNumberTextFiled
+    public FilterPassengers(List<Passenger> passengers, JComboBox survivedComboBox, JTextField passengerIdRangeTextFieldMin,
+                            JTextField passengerIdRangeTextFieldMax, JTextField passengerNameTextFiled, JComboBox sexComboBox,
+                            JTextField passengerSibSpNumberTextFiled, JTextField passengerParchSpNumberTextFiled, JTextField ticketNumberTextFiled
             , JTextField fareTextField1, JTextField fareTextField2, JTextField cabinNumberTextFiled,
-             JComboBox embarkedCoboBox, JTextField ageTextFiled) {
+                            JComboBox embarkedCoboBox, JTextField ageTextFiled) {
 
         this.passengers = passengers;
 
         this.searchButton = CreateNew.newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);
         this.searchButton.addActionListener((e) -> {
-            List<Passenger> p = byName(this.passengers, passengerNameTextFiled.getText());
-
+            List<Passenger> p = rangePassengerId(passengerIdRangeTextFieldMin.getText(),
+                    passengerIdRangeTextFieldMax.getText(), this.passengers);
+            //byName(passengers, passengerNameTextFiled.getText());
 //                    this.passengers;
 //                    rangePassengerId(filter.getPassengerIdRangeTextFieldMin().getText(),
 //                    filter.getPassengerIdRangeTextFieldMax().getText(), this.passengers);
@@ -34,17 +35,17 @@ public class F {
             if (!passengerSibSpNumberTextFiled.getText().equals(""))
                 p = bySibSpNumber(p, Integer.parseInt(passengerSibSpNumberTextFiled.getText()));
 
-//            if (!filter.getPassengerParchSpNumberTextFiled().getText().equals(""))
-//                p = byParchNumber(p, Integer.parseInt(filter.getPassengerParchSpNumberTextFiled().getText()));
-//
-//            if (!filter.getCabinNumberTextFiled().getText().equals(""))
-//                p = byCabinNumber(p, filter.getCabinNumberTextFiled().getText());
-//
-//            if (!filter.getAgeTextFiled().getText().equals(""))
-//                p = byAge(p, Integer.parseInt(filter.getAgeTextFiled().getText()));
+            if (!passengerParchSpNumberTextFiled.getText().equals(""))
+                p = byParchNumber(p, Integer.parseInt(passengerParchSpNumberTextFiled.getText()));
+
+            if (!cabinNumberTextFiled.getText().equals(""))
+                p = byCabinNumber(p, cabinNumberTextFiled.getText());
+
+            if (!ageTextFiled.getText().equals(""))
+                p = byAge(p, Integer.parseInt(ageTextFiled.getText()));
 
 
-            System.out.println(p);
+            System.out.println(p.size());
         });
     }
 

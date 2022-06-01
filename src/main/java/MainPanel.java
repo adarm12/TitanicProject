@@ -112,10 +112,8 @@ public class MainPanel extends JPanel {
 
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
         this.passengers = readFromFile(file);
-//        System.out.println(this.passengers.get(3));
 
-        Filter filter = new Filter(30, 50, this.passengers, this);
-        F filterP = new F(this.passengers, survivedComboBox, passengerIdRangeTextFieldMin,
+        FilterPassengers filterP = new FilterPassengers(this.passengers, survivedComboBox, passengerIdRangeTextFieldMin,
                 passengerIdRangeTextFieldMax, passengerNameTextFiled, sexComboBox,
                 passengerSibSpNumberTextFiled, passengerParchSpNumberTextFiled, ticketNumberTextFiled
                 , fareTextField1, fareTextField2, cabinNumberTextFiled,
@@ -146,11 +144,6 @@ public class MainPanel extends JPanel {
         this.add(embarkedCoboBox);
         this.add(ageLabel);
         this.add(ageTextFiled);
-
-
-        // System.out.println(Filter.rangePassengerId(890,1,this.passengers));
-
-
     }
 
 
@@ -161,7 +154,6 @@ public class MainPanel extends JPanel {
             int i = 0;
             while (scanner.hasNextLine()) {
                 String passenger = scanner.nextLine();
-                //   System.out.println(passenger);
                 if (i != 0) {
                     Passenger passengerObject = new Passenger(passenger);
                     passengers.add(passengerObject);
@@ -304,5 +296,4 @@ public class MainPanel extends JPanel {
         graphics.drawImage(this.background.getImage(), 0, 0,
                 Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT, null);
     }
-
 }
