@@ -20,6 +20,8 @@ public class FilterPassengers {
         this.searchButton.addActionListener((e) -> {
             List<Passenger> p = rangePassengerId(passengerIdRangeTextFieldMin.getText(),
                     passengerIdRangeTextFieldMax.getText(), this.passengers);
+            System.out.println("p1: " + p.size());
+
             //byName(passengers, passengerNameTextFiled.getText());
 //                    this.passengers;
 //                    rangePassengerId(filter.getPassengerIdRangeTextFieldMin().getText(),
@@ -28,12 +30,16 @@ public class FilterPassengers {
 
             if (!passengerNameTextFiled.getText().equals(""))
                 p = byName(p, passengerNameTextFiled.getText());
+            System.out.println("p2: " + p.size());
 
-            if (!ticketNumberTextFiled.equals(""))
-                p = byTicket(p, ticketNumberTextFiled.getText());
-
-            if (!passengerSibSpNumberTextFiled.getText().equals(""))
-                p = bySibSpNumber(p, Integer.parseInt(passengerSibSpNumberTextFiled.getText()));
+//            if (!ticketNumberTextFiled.equals(""))
+//                p = byTicket(p, ticketNumberTextFiled.getText());
+//            System.out.println("p3: " + p.size());
+//
+//            if (!passengerSibSpNumberTextFiled.getText().equals(""))
+//                p = bySibSpNumber(p, Integer.parseInt(passengerSibSpNumberTextFiled.getText()));
+//
+//            System.out.println("p4: " + p.size());
 
             if (!passengerParchSpNumberTextFiled.getText().equals(""))
                 p = byParchNumber(p, Integer.parseInt(passengerParchSpNumberTextFiled.getText()));
