@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 
 public class MainPanel extends JPanel {
@@ -33,9 +34,8 @@ public class MainPanel extends JPanel {
     private JButton button;
 
     private List<Passenger> passengers;
-    private List<Passenger> afterSearchListPassengers;
     private ImageIcon background;
-
+    public int counter;
 
     public MainPanel(int x, int y, int width, int height) {
         this.setLayout(null);
@@ -91,6 +91,17 @@ public class MainPanel extends JPanel {
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
         this.passengers = readFromFile(file);
 
+        this.counter = Constants.COUNTER;
+
+
+        try {
+            writeToNewFile(this.passengers, Constants.PATH_TO_NEW_FILE, this.counter);
+            this.counter++;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         FilterPassengers filterP = new FilterPassengers(this.passengers, survivedComboBox, passengerIdRangeTextFieldMin,
                 passengerIdRangeTextFieldMax, passengerNameTextFiled, sexComboBox,
                 passengerSibSpNumberTextFiled, passengerParchSpNumberTextFiled, ticketNumberTextFiled
@@ -120,7 +131,6 @@ public class MainPanel extends JPanel {
         this.add(cabinNumberTextFiled);
         this.add(embarkedLabel);
         this.add(embarkedCoboBox);
-
     }
 
 
@@ -144,15 +154,17 @@ public class MainPanel extends JPanel {
         return passengers;
     }
 
-    public void writeToNewFile(List<Passenger> passengerList, String path) {
+    public void writeToNewFile(List<Passenger> passengerList, String path, int counter) throws IOException {
         try {
-            FileOutputStream fileOut = new FileOutputStream(path);
+            FileWriter fileWriter = new FileWriter(Constants.PATH_TO_NEW_FILE + counter + ".csv");
+            fileWriter.write("\n");
+
             int i = 0;
             while (i < passengerList.size()) {
-                ObjectOutputStream newFile = new ObjectOutputStream(fileOut);
-                newFile.writeObject(passengerList);
+                fileWriter.write("\n");
                 i++;
             }
+            fileWriter.close();
         } catch (
                 IOException e) {
             e.printStackTrace();

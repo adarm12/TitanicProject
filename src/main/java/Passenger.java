@@ -77,8 +77,13 @@ public class Passenger {
         else {
             return "All";
         }
-
     }
+    public String changeToCSV() {
+        return this.passengerId + "," + this.isSurvived() + "," + this.pClass + "," + this.name + "," +
+                this.sex + "," + this.age + "," + this.sibSp + "," + this.parch + "," + this.ticket +
+                "," + this.fare + "," + this.cabin + "," + this.embarked;
+    }
+
 
     public int getPassengerId() {
         return passengerId;

@@ -10,6 +10,8 @@ public class FilterPassengers {
 
     private List<Passenger> passengers;
     private JButton searchButton;
+    private JLabel messageForUser;
+    private List<Passenger> survivedPassengers;
 
     public FilterPassengers(List<Passenger> passengers, JComboBox pClassComboBox, JTextField passengerIdRangeTextFieldMin,
                             JTextField passengerIdRangeTextFieldMax, JTextField passengerNameTextFiled, JComboBox sexComboBox,
@@ -22,40 +24,30 @@ public class FilterPassengers {
         this.searchButton.addActionListener((e) -> {
             this.passengers = rangePassengerId(passengerIdRangeTextFieldMin.getText(),
                     passengerIdRangeTextFieldMax.getText(), this.passengers);
-            System.out.println("p1: " + this.passengers.size());
 
             if (pClassComboBox.getSelectedIndex() != 0) {
                 this.passengers = byPclass(this.passengers, pClassComboBox.getSelectedIndex());
             }
-            System.out.println("p2: " + this.passengers.size());
 
             if (!passengerNameTextFiled.getText().equals(""))
                 this.passengers = byName(this.passengers, passengerNameTextFiled.getText());
-            System.out.println("p3: " + this.passengers.size());
 
             if (sexComboBox.getSelectedIndex() != 0) {
                 this.passengers = bySex(this.passengers, (String) sexComboBox.getSelectedItem());
             }
-            System.out.println("p5: " + this.passengers.size());
 
             if (!passengerSibSpNumberTextFiled.getText().equals(""))
                 this.passengers = bySibSpNumber(this.passengers, Integer.parseInt(passengerSibSpNumberTextFiled.getText()));
 
-            System.out.println("p4: " + this.passengers.size());
-
             if (!passengerParchSpNumberTextFiled.getText().equals(""))
                 this.passengers = byParchNumber(this.passengers, Integer.parseInt(passengerParchSpNumberTextFiled.getText()));
 
-            System.out.println("p6: " + this.passengers.size());
-
             if (!ticketNumberTextFiled.getText().equals(""))
                 this.passengers = byTicket(this.passengers, ticketNumberTextFiled.getText());
-            System.out.println("p3: " + this.passengers.size());
 //
 //            if (!fareTextField1.equals("") && !fareTextField2.equals(""))
 //            this.passengers = rangeTicketPrice(fareTextField1.getText(),
 //                    fareTextField2.getText(), this.passengers);
-            System.out.println("p1: " + this.passengers.size());
 
             if (!cabinNumberTextFiled.getText().equals(""))
                 this.passengers = byCabinNumber(this.passengers, cabinNumberTextFiled.getText());
@@ -63,17 +55,18 @@ public class FilterPassengers {
             if (embarkedCoboBox.getSelectedIndex() != 0) {
                 this.passengers = byEmbarked(this.passengers, (String) embarkedCoboBox.getSelectedItem());
             }
-            System.out.println("p7: " + this.passengers.size());
-
-            System.out.println(this.passengers.size());
+            this.messageForUser = CreateNew.newLabel("", 100, 700, Constants.LABEL_WIDTH, 80);
+            this.survivedPassengers = this.passengers.stream().filter(Passenger::isSurvived).collect(Collectors.toList());
+            this.messageForUser.setText("passengers: " + this.passengers.size() + " (survived: " + this.survivedPassengers.size()+ ")");
+            System.out.println(this.messageForUser.getText());
         });
     }
 
     private List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
         if (startFrom.equals(""))
-            startFrom = "1";
+            startFrom = Constants.PASSENGER_RANGE_ID_MIN;
         if (limitTo.equals(""))
-            limitTo = "891";
+            limitTo = Constants.PASSENGER_RANGE_ID_MAX;
         if (isValidRange(startFrom, limitTo)) {
             return this.passengers.stream().limit(Integer.parseInt(limitTo)).skip(Integer.parseInt(startFrom) - 1).collect(Collectors.toList());
         }
@@ -110,7 +103,6 @@ public class FilterPassengers {
                 passengers.add(list.get(i));
         }
         return passengers;
-        //  return this.passengers.stream().filter().collect(Collectors.toList());
     }
 
     private List<Passenger> byPclass(List<Passenger> list, int pClass) {
@@ -139,13 +131,6 @@ public class FilterPassengers {
 //        }
 //        return passengers;
 //    }
-//
-//    public List<Passenger> byFare(String min, String max, List<Passenger> passengers) {
-//        return passengers.stream().filter(Passenger -> Passenger.rangeFare(Double.parseDouble(min), Double.parseDouble(max))).collect(Collectors.toList());
-//    }
-
-
-
 
     private List<Passenger> byCabinNumber(List<Passenger> list, String cabin) {
         return list.stream().filter(passengers -> selectedString(passengers.getCabin(), cabin)).collect(Collectors.toList());
@@ -154,10 +139,6 @@ public class FilterPassengers {
     private List<Passenger> byEmbarked(List<Passenger> list, String embarked) {
         return list.stream().filter(passengers -> selectedChar(passengers.getEmbarked(), embarked)).collect(Collectors.toList());
     }
-
-//    private List<Passenger> byAge(List<Passenger> list, int age) {
-//        return list.stream().filter(passengers -> selectedNumber(passengers.getAge(), age)).collect(Collectors.toList());
-//    }
 
 
     private boolean isValidValue(int valueToCheck) {
@@ -195,19 +176,6 @@ public class FilterPassengers {
         return isSame;
     }
 
-//    public boolean rangeFare(double min, double max) {
-//        if (min == 0 && max > 0) {
-//            return this.passengers.fa <= max;
-//        } else if (min > 0 && max == 0) {
-//            return this.fare >= min;
-//        } else if (min > 0 && max > 0 && max > min) {
-//            return this.fare >= min && this.fare < max;
-//        } else if (min == max && min != 0) {
-//            return this.fare == max;
-//        }
-//        return true;
-//    }
-
     public List<Passenger> getPassengers() {
         return passengers;
     }
@@ -224,4 +192,19 @@ public class FilterPassengers {
         this.searchButton = searchButton;
     }
 
+    public JLabel getMessageForUser() {
+        return messageForUser;
+    }
+
+    public void setMessageForUser(JLabel messageForUser) {
+        this.messageForUser = messageForUser;
+    }
+
+    public List<Passenger> getSurvivedPassengers() {
+        return survivedPassengers;
+    }
+
+    public void setSurvivedPassengers(List<Passenger> survivedPassengers) {
+        this.survivedPassengers = survivedPassengers;
+    }
 }
