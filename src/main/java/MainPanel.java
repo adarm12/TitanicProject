@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -165,6 +164,21 @@ public class MainPanel extends JPanel {
             e.printStackTrace();
         }
         return passengers;
+    }
+
+    public void writeToNewText(List<Passenger> passengerList, String path) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(path);
+            int i = 0;
+            while (i < passengerList.size()) {
+                ObjectOutputStream newFile = new ObjectOutputStream(fileOut);
+                newFile.writeObject(passengerList);
+                i++;
+            }
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
