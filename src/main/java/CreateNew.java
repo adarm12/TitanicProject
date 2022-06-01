@@ -23,7 +23,7 @@ public class CreateNew extends JComboBox {
 
     public static JButton newButton(String text, int x, int y) {
         JButton button = new JButton(text);
-        button.setBounds(x, y, 250, 70);
+        button.setBounds(x, y, Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT);
         button.setFont(myFont);
         button.setFocusable(false);
         return button;

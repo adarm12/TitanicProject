@@ -51,10 +51,10 @@ public class FilterPassengers {
             if (!ticketNumberTextFiled.getText().equals(""))
                 this.passengers = byTicket(this.passengers, ticketNumberTextFiled.getText());
             System.out.println("p3: " + this.passengers.size());
-
-            if (!fareTextField1.equals("") && !fareTextField2.equals(""))
-            this.passengers = rangeTicketPrice(fareTextField1.getText(),
-                    fareTextField2.getText(), this.passengers);
+//
+//            if (!fareTextField1.equals("") && !fareTextField2.equals(""))
+//            this.passengers = rangeTicketPrice(fareTextField1.getText(),
+//                    fareTextField2.getText(), this.passengers);
             System.out.println("p1: " + this.passengers.size());
 
             if (!cabinNumberTextFiled.getText().equals(""))
@@ -133,16 +133,16 @@ public class FilterPassengers {
         return list.stream().filter(passengers -> selectedString(passengers.getTicket(), ticket)).collect(Collectors.toList());
     }
 
-    private List<Passenger> rangeTicketPrice(String startFrom, String limitTo, List<Passenger> passengers) {
-        if (isValidRange(startFrom, limitTo)) {
-            return passengers.stream().filter( -> selectedString(passengers.getCabin(), cabin)).collect(Collectors.toList());
-        }
-        return passengers;
-    }
-
-    public List<Passenger> byFare(String min, String max, List<Passenger> passengers) {
-        return passengers.stream().filter(Passenger -> Passenger.rangeFare(Double.parseDouble(min), Double.parseDouble(max))).collect(Collectors.toList());
-    }
+//    private List<Passenger> rangeTicketPrice(String startFrom, String limitTo, List<Passenger> passengers) {
+//        if (isValidRange(startFrom, limitTo)) {
+//            return passengers.stream().filter( -> selectedString(passengers.getCabin(), cabin)).collect(Collectors.toList());
+//        }
+//        return passengers;
+//    }
+//
+//    public List<Passenger> byFare(String min, String max, List<Passenger> passengers) {
+//        return passengers.stream().filter(Passenger -> Passenger.rangeFare(Double.parseDouble(min), Double.parseDouble(max))).collect(Collectors.toList());
+//    }
 
 
 
@@ -195,18 +195,18 @@ public class FilterPassengers {
         return isSame;
     }
 
-    public boolean rangeFare(double min, double max) {
-        if (min == 0 && max > 0) {
-            return this.passengers.fa <= max;
-        } else if (min > 0 && max == 0) {
-            return this.fare >= min;
-        } else if (min > 0 && max > 0 && max > min) {
-            return this.fare >= min && this.fare < max;
-        } else if (min == max && min != 0) {
-            return this.fare == max;
-        }
-        return true;
-    }
+//    public boolean rangeFare(double min, double max) {
+//        if (min == 0 && max > 0) {
+//            return this.passengers.fa <= max;
+//        } else if (min > 0 && max == 0) {
+//            return this.fare >= min;
+//        } else if (min > 0 && max > 0 && max > min) {
+//            return this.fare >= min && this.fare < max;
+//        } else if (min == max && min != 0) {
+//            return this.fare == max;
+//        }
+//        return true;
+//    }
 
     public List<Passenger> getPassengers() {
         return passengers;

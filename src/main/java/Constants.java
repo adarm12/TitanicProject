@@ -14,20 +14,29 @@ public class Constants {
     public static final String[] PASSENGER_SEX_OPTIONS = {"All", "female", "male"};
     public static final String[] PASSENGER_EMBARKED_OPTIONS = {"All", "C", "S","Q"};
     public static final int MARGIN_FROM_TOP = 25;
-    public static final int MARGIN_FROM_LEFT = 25;
-    public static final int ANOTHER_MARGIN_FROM_LEFT = 400;
+    public static final int MARGIN_FROM_LEFT_ONE = 25;
+    public static final int MARGIN_FROM_LEFT_TWO = 400;
+    public static final int MARGIN_FROM_LEFT_THREE = 20;
     public static final int LABEL_WIDTH = 150;
     public static final int LABEL_HEIGHT = 30;
     public static final int COMBO_BOX_WIDTH = 80;
     public static final int COMBO_BOX_HEIGHT = 30;
+    public static final int BUTTON_WIDTH = 250;
+    public static final int BUTTON_HEIGHT = 70;
+
 
     public static final int SEARCH_BUTTON_X = 150;
     public static final int SEARCH_BUTTON_Y = 750;
 
+    public static final int THREE_TIMES = 3;
     public static final int FOUR_TIMES = 4;
     public static final int EIGHT_TIMES = 8;
     public static final int TWELVE_TIMES = 12;
     public static final int SIXTEEN_TIMES = 16;
+    public static final int PARTS_TWO = 2;
+    public static final int ADD_ONE = 1;
+
+
 
     public static final char COMMA = ',', DOT = '.';
     public static final int LETTER_AFTER_DOT = 2;
