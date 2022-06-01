@@ -1,5 +1,3 @@
-
-
 public class Passenger {
     private int passengerId;
     private boolean survived;
@@ -64,7 +62,23 @@ public class Passenger {
 //            }
 //        }
 //    }
+//    public boolean isSameSex(String sex){
+//        if (sex.equals("All")){
+//            return true;
+//        }
+//        return this.sex.equals(sex);// return false
+//    }
+    public String bySex(String sex){
+        if (sex.equals("male")){
+            return "male";
+        }else if (sex.equals("female")){
+            return "female";
+        }
+        else {
+            return "All";
+        }
 
+    }
 
     public int getPassengerId() {
         return passengerId;

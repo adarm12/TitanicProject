@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,9 +19,9 @@ public class FilterPassengers {
         this.passengers = passengers;
         this.searchButton = CreateNew.newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);
         this.searchButton.addActionListener((e) -> {
-            List<Passenger> p = rangePassengerId(passengerIdRangeTextFieldMin.getText(),
+           this.passengers = rangePassengerId(passengerIdRangeTextFieldMin.getText(),
                     passengerIdRangeTextFieldMax.getText(), this.passengers);
-            System.out.println("p1: " + p.size());
+            System.out.println("p1: " + this.passengers.size());
 
             //byName(passengers, passengerNameTextFiled.getText());
 //                    this.passengers;
@@ -29,31 +30,52 @@ public class FilterPassengers {
 //            System.out.println(p.size());
 
             if (!passengerNameTextFiled.getText().equals(""))
-                p = byName(p, passengerNameTextFiled.getText());
-            System.out.println("p2: " + p.size());
+                this.passengers = byName(this.passengers, passengerNameTextFiled.getText());
+            System.out.println("p2: " + this.passengers.size());
 
             if (!ticketNumberTextFiled.getText().equals(""))
-                p = byTicket(p, ticketNumberTextFiled.getText());
-            System.out.println("p3: " + p.size());
+                this.passengers = byTicket(this.passengers, ticketNumberTextFiled.getText());
+            System.out.println("p3: " + this.passengers.size());
 
             if (!passengerSibSpNumberTextFiled.getText().equals(""))
-                p = bySibSpNumber(p, Integer.parseInt(passengerSibSpNumberTextFiled.getText()));
+                this.passengers = bySibSpNumber(this.passengers, Integer.parseInt(passengerSibSpNumberTextFiled.getText()));
 
-            System.out.println("p4: " + p.size());
+            System.out.println("p4: " + this.passengers.size());
+
+            sexComboBox.addActionListener((ee) -> {
+                if (ee.getSource() == sexComboBox) {
+                    if (sexComboBox.getSelectedIndex() != 0) {
+                        this.passengers = bySex(this.passengers, (String) sexComboBox.getSelectedItem());
+                    }
+                }
+            });
+            System.out.println("p5: " + this.passengers.size());
+
 
             if (!passengerParchSpNumberTextFiled.getText().equals(""))
-                p = byParchNumber(p, Integer.parseInt(passengerParchSpNumberTextFiled.getText()));
-            System.out.println("p5: " + p.size());
+                this.passengers = byParchNumber(this.passengers, Integer.parseInt(passengerParchSpNumberTextFiled.getText()));
+            System.out.println("p6: " + this.passengers.size());
             if (!cabinNumberTextFiled.getText().equals(""))
-                p = byCabinNumber(p, cabinNumberTextFiled.getText());
+                this.passengers = byCabinNumber(this.passengers, cabinNumberTextFiled.getText());
 
 //            if (!ageTextFiled.getText().equals(""))
 //                p = byAge(p, Integer.parseInt(ageTextFiled.getText()));
 //            System.out.println("age: " + p.size());
 
-            System.out.println(p.size());
+            System.out.println(this.passengers.size());
         });
     }
+
+//    public void addAction(JComboBox box, List<Passenger> passengers) {
+//        box.addActionListener((e) -> {
+//            List<Passenger> passenger = passengers;
+//            if (e.getSource() == box) {
+//                if (box.getSelectedIndex() != 0) {
+//                    passenger = bySex(passenger, (String) box.getSelectedItem());
+//                }
+//            }
+//        });
+//    }
 
 
     public List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
@@ -63,7 +85,7 @@ public class FilterPassengers {
             limitTo = "891";
         if (isValidRangeId(startFrom, limitTo)) {
             return this.passengers.stream().limit(Integer.parseInt(limitTo))
-                    .skip(Integer.parseInt(startFrom)- 1).collect(Collectors.toList());
+                    .skip(Integer.parseInt(startFrom) - 1).collect(Collectors.toList());
 
         }
         return passengers;
