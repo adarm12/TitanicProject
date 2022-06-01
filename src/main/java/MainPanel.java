@@ -166,7 +166,7 @@ public class MainPanel extends JPanel {
         return passengers;
     }
 
-    public void writeToNewText(List<Passenger> passengerList, String path) {
+    public void writeToNewFile(List<Passenger> passengerList, String path) {
         try {
             FileOutputStream fileOut = new FileOutputStream(path);
             int i = 0;

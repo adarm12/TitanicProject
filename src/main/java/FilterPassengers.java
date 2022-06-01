@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class FilterPassengers {
         this.passengers = passengers;
         this.searchButton = CreateNew.newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);
         this.searchButton.addActionListener((e) -> {
-           this.passengers = rangePassengerId(passengerIdRangeTextFieldMin.getText(),
+            this.passengers = rangePassengerId(passengerIdRangeTextFieldMin.getText(),
                     passengerIdRangeTextFieldMax.getText(), this.passengers);
             System.out.println("p1: " + this.passengers.size());
 
@@ -42,15 +43,6 @@ public class FilterPassengers {
 
             System.out.println("p4: " + this.passengers.size());
 
-            sexComboBox.addActionListener((ee) -> {
-                if (ee.getSource() == sexComboBox) {
-                    if (sexComboBox.getSelectedIndex() != 0) {
-                        this.passengers = bySex(this.passengers, (String) sexComboBox.getSelectedItem());
-                    }
-                }
-            });
-            System.out.println("p5: " + this.passengers.size());
-
 
             if (!passengerParchSpNumberTextFiled.getText().equals(""))
                 this.passengers = byParchNumber(this.passengers, Integer.parseInt(passengerParchSpNumberTextFiled.getText()));
@@ -58,25 +50,20 @@ public class FilterPassengers {
             if (!cabinNumberTextFiled.getText().equals(""))
                 this.passengers = byCabinNumber(this.passengers, cabinNumberTextFiled.getText());
 
-//            if (!ageTextFiled.getText().equals(""))
-//                p = byAge(p, Integer.parseInt(ageTextFiled.getText()));
-//            System.out.println("age: " + p.size());
 
             System.out.println(this.passengers.size());
         });
     }
 
-//    public void addAction(JComboBox box, List<Passenger> passengers) {
-//        box.addActionListener((e) -> {
-//            List<Passenger> passenger = passengers;
-//            if (e.getSource() == box) {
-//                if (box.getSelectedIndex() != 0) {
-//                    passenger = bySex(passenger, (String) box.getSelectedItem());
-//                }
-//            }
-//        });
-//    }
-
+    public void addAction(JComboBox box, List<Passenger> passengers) {
+        box.addActionListener((e) -> {
+            if (e.getSource() == box) {
+                if (box.getSelectedIndex() != 0) {
+                    this.passengers = bySex(this.passengers, (String) box.getSelectedItem());
+                }
+            }
+        });
+    }
 
     public List<Passenger> rangePassengerId(String startFrom, String limitTo, List<Passenger> passengers) {
         if (startFrom.equals(""))
@@ -84,9 +71,7 @@ public class FilterPassengers {
         if (limitTo.equals(""))
             limitTo = "891";
         if (isValidRangeId(startFrom, limitTo)) {
-            return this.passengers.stream().limit(Integer.parseInt(limitTo))
-                    .skip(Integer.parseInt(startFrom) - 1).collect(Collectors.toList());
-
+            return this.passengers.stream().limit(Integer.parseInt(limitTo)).skip(Integer.parseInt(startFrom) - 1).collect(Collectors.toList());
         }
         return passengers;
     }
