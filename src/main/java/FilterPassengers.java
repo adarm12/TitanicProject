@@ -15,7 +15,7 @@ public class FilterPassengers {
                             JTextField passengerIdRangeTextFieldMax, JTextField passengerNameTextFiled, JComboBox sexComboBox,
                             JTextField passengerSibSpNumberTextFiled, JTextField passengerParchSpNumberTextFiled, JTextField ticketNumberTextFiled
             , JTextField fareTextField1, JTextField fareTextField2, JTextField cabinNumberTextFiled,
-                            JComboBox embarkedCoboBox, JTextField ageTextFiled) {
+                            JComboBox embarkedCoboBox) {
 
         this.passengers = passengers;
         this.searchButton = CreateNew.newButton("search", Constants.SEARCH_BUTTON_X, Constants.SEARCH_BUTTON_Y);

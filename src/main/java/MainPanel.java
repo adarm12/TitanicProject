@@ -31,9 +31,6 @@ public class MainPanel extends JPanel {
     private JLabel embarkedLabel;
     private JComboBox embarkedCoboBox;
     private JButton button;
-    private JLabel ageLabel;
-    private JTextField ageTextFiled;
-
 
     private List<Passenger> passengers;
     private List<Passenger> afterSearchListPassengers;
@@ -70,17 +67,9 @@ public class MainPanel extends JPanel {
         this.sexLabel = CreateNew.newLabel("Sex:  ", x + Constants.MARGIN_FROM_LEFT,
                 y + Constants.MARGIN_FROM_TOP + Constants.TWELVE_TIMES * Constants.MARGIN_FROM_TOP,
                 Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
-        this.sexComboBox = new JComboBox(Constants.PASSENGER_SEX_OPTIONS);
-        this.sexComboBox.setBounds(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + Constants.TWELVE_TIMES * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
-//        this.sexComboBox.addActionListener((e) -> {
-//            if (e.getSource() == this.sexComboBox) {
-//                if (this.sexComboBox.getSelectedIndex() != 0) {
-//                    System.out.println(this.sexComboBox.getSelectedItem());
-//
-//                }
-//            }
-//        });
-
+        this.sexComboBox = CreateNew.newComboBox(Constants.PASSENGER_SEX_OPTIONS,
+                passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1,
+                passengerIdRangeLabel.getY() + Constants.TWELVE_TIMES * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
 
         this.passengerSibSpNumberLabel = CreateNew.newLabel("Sibsp number: ", x + Constants.MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 16 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         this.passengerSibSpNumberTextFiled = CreateNew.newTextField(passengerIdRangeLabel.getX() + passengerIdRangeLabel.getWidth() + 1, passengerIdRangeLabel.getY() + 16 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
@@ -99,15 +88,11 @@ public class MainPanel extends JPanel {
         this.cabinNumberTextFiled = CreateNew.newTextField(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + 12 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
 
         this.embarkedLabel = CreateNew.newLabel("Embarked:  ", x + Constants.MARGIN_FROM_LEFT + Constants.ANOTHER_MARGIN_FROM_LEFT, y + Constants.MARGIN_FROM_TOP + 16 * Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
-        this.embarkedCoboBox = new JComboBox(Constants.PASSENGER_EMBARKED_OPTIONS);
-        this.embarkedCoboBox.setBounds(passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1, passengerParchNumberLabel.getY() + 16 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+        this.embarkedCoboBox = CreateNew.newComboBox(Constants.PASSENGER_EMBARKED_OPTIONS, passengerParchNumberLabel.getX() + passengerParchNumberLabel.getWidth() + 1,
+                passengerParchNumberLabel.getY() + 16 * Constants.MARGIN_FROM_TOP, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
         this.embarkedCoboBox.addActionListener((e) -> {
             //do whatever you want on change
         });
-
-        this.ageLabel = CreateNew.newLabel("Age: ", x + Constants.ANOTHER_MARGIN_FROM_LEFT * 2, y + Constants.MARGIN_FROM_TOP, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
-        this.ageTextFiled = CreateNew.newTextField(ageLabel.getX() + Constants.MARGIN_FROM_LEFT * 3, passengerParchNumberLabel.getY(), Constants.COMBO_BOX_WIDTH / 2, Constants.COMBO_BOX_HEIGHT);
-
 
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
         this.passengers = readFromFile(file);
@@ -116,7 +101,7 @@ public class MainPanel extends JPanel {
                 passengerIdRangeTextFieldMax, passengerNameTextFiled, sexComboBox,
                 passengerSibSpNumberTextFiled, passengerParchSpNumberTextFiled, ticketNumberTextFiled
                 , fareTextField1, fareTextField2, cabinNumberTextFiled,
-                embarkedCoboBox, ageTextFiled);
+                embarkedCoboBox);
 
         this.add(filterP.getSearchButton());
         this.add(passengerIdRangeLabel);
@@ -141,8 +126,7 @@ public class MainPanel extends JPanel {
         this.add(cabinNumberTextFiled);
         this.add(embarkedLabel);
         this.add(embarkedCoboBox);
-        this.add(ageLabel);
-        this.add(ageTextFiled);
+
     }
 
 
@@ -284,14 +268,6 @@ public class MainPanel extends JPanel {
 
     public void setButton(JButton button) {
         this.button = button;
-    }
-
-    public JTextField getAgeTextFiled() {
-        return ageTextFiled;
-    }
-
-    public void setAgeTextFiled(JTextField ageTextFiled) {
-        this.ageTextFiled = ageTextFiled;
     }
 
     public List<Passenger> getPassengers() {
